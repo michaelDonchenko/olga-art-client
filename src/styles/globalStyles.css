@@ -1,0 +1,9 @@
+@import '~react-image-gallery/styles/css/image-gallery.css';
+
+body {
+  height: 100vh;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}

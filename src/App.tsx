@@ -1,58 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { CssBaseline } from '@material-ui/core'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Home from './pages/home/Home'
+import styles from './styles/appStyles'
+import NavBar from './components/app-bar/NavBar'
+import Login from './pages/login/Login'
+import Register from './pages/register/Register'
+import Shop from './pages/shop/Shop'
+import Footer from './components/footer/Footer'
+import Cart from './pages/cart/Cart'
 
-function App() {
+const App: React.FC = () => {
+  const classes = styles()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+    <>
+      <CssBaseline />
+      <Router>
+        <main className={classes.mainContainer}>
+          <NavBar />
+
+          <Switch>
+            <div className={classes.container}>
+              <Route path='/' exact component={Home} />
+              <Route path='/shop' exact component={Shop} />
+              <Route path='/cart' exact component={Cart} />
+              <Route path='/login' exact component={Login} />
+              <Route path='/register' exact component={Register} />
+            </div>
+          </Switch>
+
+          <Footer />
+        </main>
+      </Router>
+    </>
+  )
 }
 
-export default App;
+export default App
