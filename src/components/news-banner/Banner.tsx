@@ -1,22 +1,9 @@
 import React from 'react'
+import styles from './styles'
 
 const Banner: React.FC = () => {
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '30vh',
-        backgroundColor: '#fce9ef',
-        margin: '10px 0',
-        display: 'flex',
-      }}
-    >
-      <div>
-        <h1>News feed</h1>
-      </div>
-      <div></div>
-    </div>
-  )
+  const classes = styles()
+  return <div className={classes.container}></div>
 }
 
 export default Banner
