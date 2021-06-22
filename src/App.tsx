@@ -8,6 +8,7 @@ import Register from './pages/register/Register'
 import Shop from './pages/shop/Shop'
 import Footer from './components/footer/Footer'
 import Cart from './pages/cart/Cart'
+import Dashboard from './pages/admin/Dashboard'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -21,11 +22,13 @@ const App: React.FC = () => {
 
           <Switch>
             <div className={classes.container}>
-              <Route path='/' exact component={Home} />
-              <Route path='/shop' exact component={Shop} />
-              <Route path='/cart' exact component={Cart} />
-              <Route path='/login' exact component={Login} />
-              <Route path='/register' exact component={Register} />
+              <Route path="/" exact component={Home} />
+              <Route path="/shop" exact component={Shop} />
+              <Route path="/cart" exact component={Cart} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+              {/* admin pages */}
+              <Route path="/admin/dashboard" exact component={Dashboard} />
             </div>
           </Switch>
 

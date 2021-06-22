@@ -18,8 +18,8 @@ const ProductCard = () => {
 
   return (
     <div className={classes.root}>
-      <img src={image} alt='Product img' style={{ width: '100%' }} />
-      <Typography className={classes.productName} variant='h5' align='center'>
+      <img src={image} alt="Product img" style={{ width: '100%' }} />
+      <Typography className={classes.productName} variant="h5" align="center">
         product name
       </Typography>
       <CardInfo category={card.category} price={card.price} qty={card.qty} />
