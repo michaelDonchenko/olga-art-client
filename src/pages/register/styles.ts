@@ -6,7 +6,7 @@ const styles = makeStyles({
     maxWidth: '95%',
     margin: '30px auto',
     minHeight: '500px',
-    height: 'fit-content',
+
     padding: '10px',
     position: 'relative',
   },
@@ -27,8 +27,7 @@ const styles = makeStyles({
   },
 
   footerDiv: {
-    position: 'absolute',
-    bottom: '0',
+    marginTop: 'auto',
   },
 
   linkSpan: {

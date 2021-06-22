@@ -5,7 +5,7 @@ const styles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    marginBottom: '25px',
+    marginBottom: '15vh',
   },
 
   title: {
@@ -15,7 +15,7 @@ const styles = makeStyles({
 
   button: {
     fontSize: '16px',
-    width: '350px',
+    width: '300px',
     maxWidth: '95%',
     margin: '10px auto',
   },

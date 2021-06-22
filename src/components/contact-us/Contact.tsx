@@ -15,6 +15,7 @@ const Contact = () => {
       </Grid>
 
       <Grid item xs={12} sm={5}>
+        <h1 className={classes.title}>My Social Media</h1>
         <SocialMedia />
       </Grid>
     </Grid>

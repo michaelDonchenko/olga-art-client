@@ -19,15 +19,16 @@ const styles = makeStyles({
     position: 'relative',
   },
 
-  formContainer: {
+  paperContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    height: '350px',
   },
 
   formElement: {
     margin: '18px 0',
-    width: '350px',
+    width: '300px',
     maxWidth: '95%',
     display: 'flex',
     alignSelf: 'center',

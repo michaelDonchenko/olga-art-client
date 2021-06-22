@@ -6,7 +6,7 @@ const PolicyRules = () => {
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Our Site Policy Rules</h1>
-      <Button className={classes.button} variant='contained' color='secondary'>
+      <Button className={classes.button} variant='contained' color='primary'>
         View our site rules
       </Button>
     </div>

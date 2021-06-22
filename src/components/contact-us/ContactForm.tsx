@@ -7,7 +7,7 @@ const ContactForm = () => {
   return (
     <div className={classes.mainContainer}>
       <form>
-        <Paper className={classes.formContainer}>
+        <Paper className={classes.paperContainer}>
           <TextField
             className={classes.formElement}
             label='Email'
