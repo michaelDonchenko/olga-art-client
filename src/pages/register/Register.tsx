@@ -2,20 +2,21 @@ import { Paper } from '@material-ui/core'
 import { TextField, Button } from '@material-ui/core'
 import styles from './styles'
 import { useHistory } from 'react-router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { register } from '../../redux/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import HandleChange from '../../hooks/HandleChange'
 import { RootState } from '../../redux/store'
 import ShowSuccess from '../../hooks/ShowSuccess'
 import ShowError from '../../hooks/ShowError'
+import { resetError } from '../../redux/reducers/authSlice'
 
 const Register = () => {
   const classes = styles()
   const history = useHistory()
   const dispatch = useDispatch()
   const { auth } = useSelector((state: RootState) => state)
-  const { loading, successMessage, errorMessage } = auth
+  const { loading, successMessage, errorMessage, user } = auth
 
   const [values, setValues] = useState({
     email: '',
@@ -33,6 +34,18 @@ const Register = () => {
   if (email !== '' && successMessage) {
     setValues({ email: '', password: '', confirmPassword: '' })
   }
+
+  if (user) {
+    history.push('/dashboard')
+  }
+
+  const resetAuthError = () => {
+    dispatch(resetError())
+  }
+
+  useEffect(() => {
+    return () => resetAuthError()
+  }, [])
 
   return (
     <Paper className={classes.mainContainer}>
@@ -83,7 +96,7 @@ const Register = () => {
       {errorMessage && ShowError(errorMessage)}
 
       <div className={classes.footerDiv}>
-        <p>
+        <p className={classes.text}>
           Already have a user? click
           <span
             onClick={() => history.push('/login')}

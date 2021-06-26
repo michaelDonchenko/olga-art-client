@@ -8,6 +8,7 @@ const SocialMediaSection = () => {
       <div className={classes.iconDiv}>
         <a
           target='_blank'
+          rel='noreferrer'
           href='https://www.instagram.com/odartshop/'
           className={classes.myIcons}
         >
@@ -19,6 +20,7 @@ const SocialMediaSection = () => {
       <div className={classes.iconDiv}>
         <a
           target='_blank'
+          rel='noreferrer'
           href='https://www.facebook.com/Olga.Don.art'
           className={classes.myIcons}
         >

@@ -11,7 +11,6 @@ export type registerObj = {
 export type loginObj = {
   email: string
   password: string
-  confirmPassword: string
 }
 
 export const registerUser = async (obj: registerObj) =>
@@ -19,3 +18,6 @@ export const registerUser = async (obj: registerObj) =>
 
 export const loginUser = async (obj: loginObj) =>
   await axios.post(`${server_url}/auth/login`, obj)
+
+export const logoutUser = async () =>
+  await axios.get(`${server_url}/auth/logout`)

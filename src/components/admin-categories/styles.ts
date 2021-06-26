@@ -6,7 +6,7 @@ const styles = makeStyles({
     maxWidth: '95%',
     margin: '30px auto',
     minHeight: '500px',
-
+    height: 'fit-content',
     padding: '10px',
     position: 'relative',
   },
@@ -15,34 +15,45 @@ const styles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    padding: '10px 5px',
   },
 
   formElement: {
-    margin: '18px 0',
+    margin: '10px 0',
     width: '300px',
     maxWidth: '95%',
     display: 'flex',
     alignSelf: 'center',
-    fontSize: '16px',
   },
 
-  footerDiv: {
-    marginTop: '30px',
+  categoriesDiv: {
+    height: '300px',
+    overflowY: 'scroll',
+    padding: '10px 5px',
   },
 
-  linkSpan: {
+  ol: {
+    maxWidth: '95%',
+    margin: '10px 0',
+  },
+
+  li: {
+    fontSize: '20px',
+    margin: '10px 0',
+  },
+
+  deleteIcon: {
+    color: '#FF69B4',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+
+  updateIcon: {
     color: '#20B2AA',
-    cursor: 'pointer',
-    margin: '0 4px',
-  },
-
-  title: {
-    textAlign: 'center',
-    margin: '15px 0',
-  },
-
-  text: {
-    textAlign: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 })
 

@@ -8,7 +8,7 @@ interface RouteProps {
   exact: boolean
 }
 
-const PrivateRoute: React.FC<RouteProps> = ({
+const AdminRoute: React.FC<RouteProps> = ({
   component: Component,
   ...rest
 }) => {
@@ -18,8 +18,8 @@ const PrivateRoute: React.FC<RouteProps> = ({
     <Route
       {...rest}
       render={(props) =>
-        !user || user.role !== 'subscriber' ? (
-          <Redirect to='/login' />
+        !user || user.role !== 'admin' ? (
+          <Redirect to='/error-page' />
         ) : (
           <Component {...props} />
         )
@@ -28,4 +28,4 @@ const PrivateRoute: React.FC<RouteProps> = ({
   )
 }
 
-export default PrivateRoute
+export default AdminRoute

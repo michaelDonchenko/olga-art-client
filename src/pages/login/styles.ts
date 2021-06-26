@@ -26,10 +26,7 @@ const styles = makeStyles({
     fontSize: '16px',
   },
 
-  footerDiv: {
-    position: 'absolute',
-    bottom: '0',
-  },
+  footerDiv: { marginTop: '30px' },
 
   linkSpan: {
     color: '#20B2AA',
@@ -40,6 +37,10 @@ const styles = makeStyles({
   title: {
     textAlign: 'center',
     margin: '15px 0',
+  },
+
+  text: {
+    textAlign: 'center',
   },
 })
 

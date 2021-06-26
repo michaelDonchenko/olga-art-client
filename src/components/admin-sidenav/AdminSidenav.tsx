@@ -1,8 +1,27 @@
 import { Typography } from '@material-ui/core'
-import { Button } from '@material-ui/core'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { Paper } from '@material-ui/core'
+import { NavLink } from 'react-router-dom'
+import styles from './styles'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../redux/actions/auth'
+import { useHistory } from 'react-router'
 
 const AdminSidenav = () => {
+  const classes = styles()
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const handleLogout = () => {
+    history.push('/')
+    dispatch(logout())
+  }
+
+  const activeLinkStyles = {
+    border: '1px solid #FFB6C1',
+    backgroundColor: '#fce4ec',
+  }
+
   return (
     <Paper
       style={{
@@ -12,57 +31,70 @@ const AdminSidenav = () => {
         flexDirection: 'column',
       }}
     >
-      <Typography align="center" variant="h5" style={{ margin: '20px auto' }}>
-        Admin pannel
+      <Typography align='center' variant='h5' style={{ margin: '20px auto' }}>
+        Admin Pannel
       </Typography>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/dashboard'
+        exact
+        className={classes.appLink}
       >
         Dashboard
-      </Button>
+      </NavLink>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/orders'
+        exact
+        className={classes.appLink}
       >
         Orders
-      </Button>
+      </NavLink>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/users'
+        exact
+        className={classes.appLink}
       >
         Users
-      </Button>
+      </NavLink>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/categories'
+        exact
+        className={classes.appLink}
       >
         Categories
-      </Button>
+      </NavLink>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/products'
+        exact
+        className={classes.appLink}
       >
         Products
-      </Button>
+      </NavLink>
 
-      <Button
-        style={{ margin: '10px auto', width: '180px', maxWidth: '95%' }}
-        color="secondary"
-        variant="contained"
+      <NavLink
+        activeStyle={activeLinkStyles}
+        to='/admin/create-product'
+        exact
+        className={classes.appLink}
       >
-        Create product
-      </Button>
+        Create Product
+      </NavLink>
+
+      <span
+        onClick={() => handleLogout()}
+        className={`${classes.appLink} ${classes.logout}`}
+      >
+        <ExitToAppIcon className={classes.icon} /> Logout
+      </span>
     </Paper>
   )
 }

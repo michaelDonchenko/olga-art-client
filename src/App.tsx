@@ -9,6 +9,16 @@ import Shop from './pages/shop/Shop'
 import Footer from './components/footer/Footer'
 import Cart from './pages/cart/Cart'
 import Dashboard from './pages/admin/Dashboard'
+import PrivateRoute from './routes/PrivateRoute'
+import UserDashboard from './pages/user/UserDashboard'
+import Orders from './pages/admin/Orders'
+import Users from './pages/admin/Users'
+import Categories from './pages/admin/Categories'
+import Products from './pages/admin/Products'
+import CreateProduct from './pages/admin/CreateProduct'
+import AdminRoute from './routes/AdminRoute'
+import UploadProductImages from './pages/admin/UploadProductImages'
+import UpdateProduct from './pages/admin/UpdateProduct'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -22,13 +32,42 @@ const App: React.FC = () => {
 
           <Switch>
             <div className={classes.container}>
-              <Route path="/" exact component={Home} />
-              <Route path="/shop" exact component={Shop} />
-              <Route path="/cart" exact component={Cart} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/register" exact component={Register} />
+              <Route path='/' exact component={Home} />
+              <Route path='/shop' exact component={Shop} />
+              <Route path='/cart' exact component={Cart} />
+              <Route path='/login' exact component={Login} />
+              <Route path='/register' exact component={Register} />
               {/* admin pages */}
-              <Route path="/admin/dashboard" exact component={Dashboard} />
+              <AdminRoute path='/admin/dashboard' exact component={Dashboard} />
+              <AdminRoute path='/admin/orders' exact component={Orders} />
+              <AdminRoute path='/admin/users' exact component={Users} />
+              <AdminRoute
+                path='/admin/categories'
+                exact
+                component={Categories}
+              />
+              <AdminRoute path='/admin/products' exact component={Products} />
+              <AdminRoute
+                path='/admin/create-product'
+                exact
+                component={CreateProduct}
+              />
+              <AdminRoute
+                path='/admin/upload-product-images/:id'
+                exact
+                component={UploadProductImages}
+              />
+              <AdminRoute
+                path='/admin/update-product/:id'
+                exact
+                component={UpdateProduct}
+              />
+              {/* user pages */}
+              <PrivateRoute
+                path='/user/dashboard'
+                exact
+                component={UserDashboard}
+              />
             </div>
           </Switch>
 
