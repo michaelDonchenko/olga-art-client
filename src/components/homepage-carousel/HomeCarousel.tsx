@@ -1,53 +1,54 @@
 import { Grid } from '@material-ui/core'
 import ImageGallery from 'react-image-gallery'
-import image1 from '../../utils/image1.jpg'
-import image2 from '../../utils/image2.jpg'
-import image3 from '../../utils/image3.jpg'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
-
-const images = [
-  {
-    original: image1,
-    thumbnail: image1,
-    description: 'test description',
-  },
-  {
-    original: image2,
-    thumbnail: image2,
-  },
-  {
-    original: image3,
-    thumbnail: image3,
-  },
-]
+import { useEffect } from 'react'
+import { randomProducts as getRandomProducs } from '../../redux/actions/product'
+import Loader from '../loader'
+import { useHistory } from 'react-router'
+import styles from './styles'
 
 const HomeCarousel: React.FC = () => {
-  const {} = useSelector((state: RootState) => state.product)
+  const { loading, randomProducts } = useSelector(
+    (state: RootState) => state.product
+  )
+  const dispatch = useDispatch()
+  const history = useHistory()
+  const classes = styles()
+
+  useEffect(() => {
+    dispatch(getRandomProducs())
+  }, [])
 
   return (
-    <Grid
-      container
-      style={{ margin: '5px 0', display: 'flex', justifyContent: 'center' }}
-    >
-      <Grid style={{ padding: '5px' }} item xs={12} sm={5}>
-        <h1 style={{ textAlign: 'center' }}>Random Products</h1>
-        <p style={{ textAlign: 'center', color: 'gray' }}>
-          Note: Click the image to view the product
+    <Grid container className={classes.container}>
+      <Grid className={classes.leftContainer} item xs={12} sm={5}>
+        <h1 className={classes.title}>Random Products</h1>
+        <p className={classes.text}>
+          Note: Click on the Image in order to see the product
         </p>
       </Grid>
 
       <Grid item xs={12} sm={5}>
-        <ImageGallery
-          showPlayButton={false}
-          autoPlay={true}
-          slideInterval={5000}
-          slideDuration={500}
-          showThumbnails={false}
-          items={images}
-          showBullets={true}
-          showNav={false}
-        />
+        {loading && <Loader />}
+        {!loading && randomProducts.length > 0 && (
+          <ImageGallery
+            showPlayButton={false}
+            autoPlay={true}
+            slideInterval={5000}
+            slideDuration={500}
+            showThumbnails={false}
+            items={randomProducts}
+            showBullets={true}
+            showNav={false}
+            onClick={(e: any) => {
+              const foundProduct = randomProducts.find(
+                (p) => p.original === e.target.src
+              )
+              history.push(`/product/${foundProduct?.productId}`)
+            }}
+          />
+        )}
       </Grid>
     </Grid>
   )

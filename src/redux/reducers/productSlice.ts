@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { productImageDelete, productImageUpload } from '../actions/cloudinary'
-import { create, product, products, remove, update } from '../actions/product'
+import {
+  create,
+  product,
+  products,
+  randomProducts,
+  remove,
+  update,
+} from '../actions/product'
 
 type Image = {
   url: string
@@ -9,6 +16,12 @@ type Image = {
 
 type Category = {
   _id: string
+}
+
+type RandomProduct = {
+  productId: string
+  original: string
+  description: string
 }
 
 export type Product = {
@@ -27,6 +40,7 @@ export type Product = {
 interface initialStateI {
   product: {} | Product
   products: any[]
+  randomProducts: RandomProduct[] | []
   productToUpdate: {} | Product
   createdProductId: null | string
   successMessage: boolean | string
@@ -37,6 +51,7 @@ interface initialStateI {
 const initialState: initialStateI = {
   product: {},
   products: [],
+  randomProducts: [],
   productToUpdate: {},
   createdProductId: null,
   successMessage: false,
@@ -169,6 +184,21 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(remove.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.errorMessage = action.payload.errors[0].msg)
+          : (state.errorMessage = action.payload.message)
+      })
+      //get random products
+      .addCase(randomProducts.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(randomProducts.fulfilled, (state, action) => {
+        state.loading = false
+        state.randomProducts = action.payload
+        state.errorMessage = false
+      })
+      .addCase(randomProducts.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false
         action.payload.errors
           ? (state.errorMessage = action.payload.errors[0].msg)

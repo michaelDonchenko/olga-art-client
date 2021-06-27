@@ -16,6 +16,9 @@ export const createProduct = async (values: productValues) =>
 export const getProducts = async () =>
   await axios.get(`${server_url}/product/products`)
 
+export const getRandomProducts = async () =>
+  await axios.get(`${server_url}/product/get-random-products`)
+
 export const getProduct = async (id: string) =>
   await axios.get(`${server_url}/product/product/${id}`)
 

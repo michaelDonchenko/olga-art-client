@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getProduct,
   getProducts,
+  getRandomProducts,
   updateProduct,
 } from '../api/product'
 import { productValues } from '../api/product'
@@ -112,6 +113,50 @@ export const remove = createAsyncThunk(
         await deleteProduct(id)
 
       return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const randomProducts = createAsyncThunk(
+  'product/randomProducts',
+  async (_, { rejectWithValue }) => {
+    type Image = {
+      url: string
+    }
+
+    type products = {
+      _id: string
+      name: string
+      price: number
+      quantity: number
+      category: string
+      description: string
+      images: Image[]
+    }
+    type getProductsResponse = {
+      products: products[]
+    }
+
+    try {
+      const response: AxiosResponse<getProductsResponse> =
+        await getRandomProducts()
+
+      type Item = { description: string; original: string; productId: string }
+      type Items = Item[]
+      let items: Items = []
+
+      let products = response.data.products
+      products.forEach((element) => {
+        items.push({
+          productId: element._id,
+          description: element.name,
+          original: element.images[0].url,
+        })
+      })
+
+      return items
     } catch (error) {
       return rejectWithValue(error.response.data)
     }
