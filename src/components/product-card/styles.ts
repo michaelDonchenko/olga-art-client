@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
   root: {
-    width: 350,
+    width: 340,
     maxWidth: '95%',
     height: 'fit-content',
     backgroundColor: 'white',
@@ -28,7 +28,7 @@ const styles = makeStyles({
   button: {
     width: '95%',
     maxWidth: '250px',
-    margin: '7px',
+    margin: '7px auto',
   },
 
   productInfo: {
@@ -57,6 +57,7 @@ const styles = makeStyles({
   text: {
     color: 'grayText',
     fontSize: '16px',
+    textAlign: 'center',
   },
 })
 

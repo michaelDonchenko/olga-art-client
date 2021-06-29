@@ -1,28 +1,49 @@
 import styles from './styles'
 import CardInfo from './CardInfo'
 import { Typography } from '@material-ui/core'
-import image from '../../utils/image1.jpg'
 import ActionButtons from './ActionButtons'
 
-const ProductCard = () => {
-  const classes = styles()
+type Image = {
+  url: string | undefined
+}
 
-  const card = {
-    category: {
-      _id: '1',
-      name: 'Rings',
-    },
-    price: 150,
-    qty: 1,
+interface IProduct {
+  name: string
+  images: Image[]
+  category: {
+    _id: string
+    name: string
   }
+  price: number
+  quantity: number
+}
+
+interface IProps {
+  product: IProduct
+}
+
+const ProductCard: React.FC<IProps> = ({ product }: IProps) => {
+  const classes = styles()
 
   return (
     <div className={classes.root}>
-      <img src={image} alt="Product img" style={{ width: '100%' }} />
-      <Typography className={classes.productName} variant="h5" align="center">
-        product name
+      <img
+        src={
+          !product.images.length
+            ? `https://via.placeholder.com/500x500?text=No+Images+Yet..`
+            : product.images[0].url
+        }
+        alt='Product img'
+        style={{ width: '100%' }}
+      />
+      <Typography className={classes.productName} variant='h5' align='center'>
+        {product.name}
       </Typography>
-      <CardInfo category={card.category} price={card.price} qty={card.qty} />
+      <CardInfo
+        category={product.category}
+        price={product.price}
+        qty={product.quantity}
+      />
       <ActionButtons />
     </div>
   )

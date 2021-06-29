@@ -40,7 +40,7 @@ const HomeCarousel: React.FC = () => {
             showThumbnails={false}
             items={randomProducts}
             showBullets={true}
-            showNav={false}
+            showNav={true}
             onClick={(e: any) => {
               const foundProduct = randomProducts.find(
                 (p) => p.original === e.target.src

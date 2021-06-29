@@ -15,7 +15,9 @@ import { useHistory } from 'react-router'
 import Loader from '../loader'
 import {
   Product,
+  resetQueryObj,
   resetSuccessMessage,
+  setPage,
   setProductToUpdate,
 } from '../../redux/reducers/productSlice'
 
@@ -23,13 +25,22 @@ const ProductsTable = () => {
   const classes = styles()
   const history = useHistory()
 
-  const { products, loading, successMessage } = useSelector(
+  const { products, loading, successMessage, page, queryObj } = useSelector(
     (state: RootState) => state.product
   )
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getProducts({ page, queryObj }))
+  }, [page, queryObj])
+
+  const handleStateReset = () => {
+    dispatch(setPage(1))
+    dispatch(resetQueryObj())
+  }
+
+  useEffect(() => {
+    return () => handleStateReset()
   }, [])
 
   const handleUpdateDetailsClick = (product: Product) => {
@@ -48,7 +59,7 @@ const ProductsTable = () => {
 
   if (successMessage === 'Product deleted succefully') {
     dispatch(resetSuccessMessage())
-    dispatch(getProducts())
+    dispatch(getProducts({ page, queryObj }))
   }
 
   return (

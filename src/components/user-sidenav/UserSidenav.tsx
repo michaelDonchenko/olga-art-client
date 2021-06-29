@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import { Paper } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import styles from './styles'
 import { useDispatch } from 'react-redux'
@@ -20,7 +19,7 @@ const UserSidenav = () => {
   }
 
   return (
-    <Paper
+    <div
       style={{
         height: 'calc(100vh - 104px)',
         width: '220px',
@@ -47,7 +46,7 @@ const UserSidenav = () => {
       >
         <ExitToAppIcon className={classes.icon} /> Logout
       </span>
-    </Paper>
+    </div>
   )
 }
 

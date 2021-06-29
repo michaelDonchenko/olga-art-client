@@ -10,11 +10,19 @@ export type productValues = {
   category: string | unknown
 }
 
+export type QueryObj = {
+  sort?: string
+  category?: string
+  productsToDisplay?: string
+}
+
 export const createProduct = async (values: productValues) =>
   await axios.post(`${server_url}/product/create`, values)
 
-export const getProducts = async () =>
-  await axios.get(`${server_url}/product/products`)
+export const getProducts = async (page: number, quertyObj: QueryObj) =>
+  await axios.get(
+    `${server_url}/product/products?page=${page}&sort=${quertyObj.sort}&category=${quertyObj.category}&products=${quertyObj.productsToDisplay}`
+  )
 
 export const getRandomProducts = async () =>
   await axios.get(`${server_url}/product/get-random-products`)

@@ -5,7 +5,7 @@ const styles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     padding: '10px',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 })
 

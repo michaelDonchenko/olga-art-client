@@ -7,7 +7,14 @@ const ActionButtons: React.FC = () => {
   const classes = styles()
 
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingBottom: '20px',
+      }}
+    >
       <Button
         endIcon={<ShoppingCartIcon />}
         className={classes.button}

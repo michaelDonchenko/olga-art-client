@@ -40,6 +40,13 @@ export type Product = {
 interface initialStateI {
   product: {} | Product
   products: any[]
+  pages: number
+  page: number
+  queryObj: {
+    sort: string
+    category: string
+    productsToDisplay: string
+  }
   randomProducts: RandomProduct[] | []
   productToUpdate: {} | Product
   createdProductId: null | string
@@ -51,6 +58,13 @@ interface initialStateI {
 const initialState: initialStateI = {
   product: {},
   products: [],
+  pages: 0,
+  page: 1,
+  queryObj: {
+    sort: 'createdAt',
+    category: '',
+    productsToDisplay: 'all',
+  },
   randomProducts: [],
   productToUpdate: {},
   createdProductId: null,
@@ -71,6 +85,28 @@ const productSlice = createSlice({
     },
     setProductToUpdate: (state, action) => {
       state.productToUpdate = action.payload
+    },
+    setPage: (state, action) => {
+      state.page = action.payload
+    },
+    setCategory: (state, action) => {
+      state.queryObj.category = action.payload
+      state.page = 1
+    },
+    setSort: (state, action) => {
+      state.queryObj.sort = action.payload
+      state.page = 1
+    },
+    setProductToDisplay: (state, action) => {
+      state.queryObj.productsToDisplay = action.payload
+      state.page = 1
+    },
+    resetQueryObj: (state) => {
+      state.queryObj = {
+        sort: 'createdAt',
+        category: '',
+        productsToDisplay: 'all',
+      }
     },
   },
   extraReducers: (builder) => {
@@ -98,6 +134,8 @@ const productSlice = createSlice({
       .addCase(products.fulfilled, (state, action) => {
         state.loading = false
         state.products = action.payload.data.products
+        state.pages = action.payload.data.pages
+        state.page = action.payload.data.page
         state.errorMessage = false
       })
       .addCase(products.rejected, (state, action: PayloadAction<any>) => {
@@ -207,7 +245,15 @@ const productSlice = createSlice({
   },
 })
 
-export const { resetSuccessMessage, setErrorMessage, setProductToUpdate } =
-  productSlice.actions
+export const {
+  resetSuccessMessage,
+  setErrorMessage,
+  setProductToUpdate,
+  setPage,
+  setCategory,
+  resetQueryObj,
+  setSort,
+  setProductToDisplay,
+} = productSlice.actions
 
 export default productSlice.reducer

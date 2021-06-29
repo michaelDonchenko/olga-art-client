@@ -23,7 +23,7 @@ const AdminSidenav = () => {
   }
 
   return (
-    <Paper
+    <div
       style={{
         height: 'calc(100vh - 104px)',
         width: '220px',
@@ -95,7 +95,7 @@ const AdminSidenav = () => {
       >
         <ExitToAppIcon className={classes.icon} /> Logout
       </span>
-    </Paper>
+    </div>
   )
 }
 

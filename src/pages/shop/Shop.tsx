@@ -1,7 +1,8 @@
 import Filters from '../../components/filters-canvas/Filters'
 import Title from '../../components/titles/Title'
 import styles from './styles'
-import ProductCard from '../../components/product-card/ProductCard'
+
+import ProductsContainer from './components/ProductsContainer'
 
 const Shop = () => {
   const classes = styles()
@@ -11,14 +12,7 @@ const Shop = () => {
       <Title content='Categories and Filters' />
       <Filters />
 
-      <div className={classes.productsContainer}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
+      <ProductsContainer />
     </div>
   )
 }

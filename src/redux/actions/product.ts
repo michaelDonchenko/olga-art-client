@@ -6,6 +6,7 @@ import {
   getProduct,
   getProducts,
   getRandomProducts,
+  QueryObj,
   updateProduct,
 } from '../api/product'
 import { productValues } from '../api/product'
@@ -31,7 +32,10 @@ export const create = createAsyncThunk(
 
 export const products = createAsyncThunk(
   'product/products',
-  async (_, { rejectWithValue }) => {
+  async (
+    { page, queryObj }: { page: number; queryObj: QueryObj },
+    { rejectWithValue }
+  ) => {
     type products = {
       name: string
       price: number
@@ -42,10 +46,15 @@ export const products = createAsyncThunk(
     }
     type getProductsResponse = {
       products: products[]
+      pages: number
+      page: number
     }
 
     try {
-      const response: AxiosResponse<getProductsResponse> = await getProducts()
+      const response: AxiosResponse<getProductsResponse> = await getProducts(
+        page,
+        queryObj
+      )
 
       return response
     } catch (error) {
@@ -152,7 +161,10 @@ export const randomProducts = createAsyncThunk(
         items.push({
           productId: element._id,
           description: element.name,
-          original: element.images[0].url,
+          original:
+            element.images.length > 0
+              ? element.images[0].url
+              : 'https://via.placeholder.com/900x900?text=No+Images+Yet..',
         })
       })
 
