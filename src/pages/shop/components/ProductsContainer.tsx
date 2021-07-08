@@ -32,6 +32,7 @@ const ProductsContainer = () => {
     <>
       <div className={classes.productsContainer}>
         {loading && <Loader />}
+        {!loading && products.length === 0 && <p>No products found...</p>}
         {!loading &&
           products.length > 0 &&
           products.map((p, i) => <ProductCard key={i} product={p} />)}
@@ -39,7 +40,7 @@ const ProductsContainer = () => {
 
       {!loading && pages > 1 && (
         <div>
-          <PaginationControll />
+          <PaginationControll page={page} pages={pages} setPage={setPage} />
         </div>
       )}
     </>

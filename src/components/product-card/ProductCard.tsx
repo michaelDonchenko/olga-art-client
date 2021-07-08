@@ -8,6 +8,7 @@ type Image = {
 }
 
 interface IProduct {
+  _id: string
   name: string
   images: Image[]
   category: {
@@ -16,14 +17,18 @@ interface IProduct {
   }
   price: number
   quantity: number
+  sold: number
+  description: string
+  wishlist: string[]
 }
 
 interface IProps {
   product: IProduct
 }
 
-const ProductCard: React.FC<IProps> = ({ product }: IProps) => {
+const ProductCard: React.FC<IProps> = ({ product }) => {
   const classes = styles()
+  const productFromProps = product
 
   return (
     <div className={classes.root}>
@@ -44,7 +49,7 @@ const ProductCard: React.FC<IProps> = ({ product }: IProps) => {
         price={product.price}
         qty={product.quantity}
       />
-      <ActionButtons />
+      <ActionButtons product={productFromProps} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ const styles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#FF69B4',
+    color: '#181818',
     fontSize: '22px',
     fontWeight: 500,
     textDecoration: 'none',
@@ -17,7 +17,7 @@ const styles = makeStyles({
     border: '1px solid white',
     '&:hover': {
       cursor: 'pointer',
-      backgroundColor: '#fce4ec',
+      backgroundColor: '#D3D3D3',
     },
   },
 

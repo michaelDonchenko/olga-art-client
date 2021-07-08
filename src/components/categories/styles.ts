@@ -4,7 +4,8 @@ const styles = makeStyles({
   element: {
     margin: '12px',
     fontSize: '18px',
-    width: '190px',
+    width: '180px',
+    backgroundColor: 'whiteSmoke',
   },
 
   container: {
@@ -12,6 +13,10 @@ const styles = makeStyles({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+  },
+
+  header: {
+    margin: '10px 0',
   },
 })
 

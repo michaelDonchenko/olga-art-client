@@ -9,6 +9,16 @@ const styles = makeStyles({
   title: {
     textAlign: 'center',
   },
+
+  image: {
+    width: '100%',
+  },
+
+  aboutDiv: {
+    padding: '10px',
+    height: '400px',
+    overflowY: 'scroll',
+  },
 })
 
 export default styles

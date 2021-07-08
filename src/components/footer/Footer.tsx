@@ -5,7 +5,7 @@ const Footer = () => {
     <div
       style={{
         height: '40px',
-        backgroundColor: '#20B2AA',
+        backgroundColor: '#181818',
         position: 'sticky',
         top: '100%',
         boxShadow:

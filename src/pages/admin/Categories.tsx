@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { categories } from '../../redux/actions/categories'
 import { RootState } from '../../redux/store'
 import UpdateCategoryForm from '../../components/admin-categories/UpdateCategoryForm'
+import AdminMobileSidenav from '../../components/admin-sidenav/AdminMobileSidenav'
 
 const Categories = () => {
   const classes = styles()
@@ -28,6 +29,10 @@ const Categories = () => {
 
       {/* content div */}
       <div className={classes.contentDiv}>
+        <Hidden smUp>
+          <AdminMobileSidenav />
+        </Hidden>
+
         <Typography align='center' variant='h5' className={classes.mainHeader}>
           Categories
         </Typography>

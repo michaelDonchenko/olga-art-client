@@ -6,12 +6,32 @@ import Banner from '../../components/news-banner/Banner'
 import PolicyRules from '../../components/site-policy-rules/PolicyRules'
 import StyledHr from '../../components/styled-hr/StyledHr'
 import WelcomeMessage from '../../components/welcome-message/WelcomeMessage'
+import { useDispatch } from 'react-redux'
+import {
+  resetErrorMessage,
+  resetSuccessMessage,
+} from '../../redux/reducers/adminSlice'
+import { useEffect } from 'react'
+import SiteRulesModal from '../../components/modals/SiteRulesModal'
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  const resetMessages = () => {
+    dispatch(resetErrorMessage())
+    dispatch(resetSuccessMessage())
+  }
+
+  useEffect(() => {
+    return () => resetMessages()
+  }, [])
+
   return (
     <div>
       <WelcomeMessage />
+      <StyledHr />
       <Banner />
+      <StyledHr />
       <Categories />
       <StyledHr />
       <HomeCarousel />
@@ -20,8 +40,10 @@ const Home = () => {
       <StyledHr />
       <Contact />
       <StyledHr />
-
       <PolicyRules />
+
+      {/* modal */}
+      <SiteRulesModal />
     </div>
   )
 }

@@ -9,6 +9,14 @@ const styles = makeStyles({
   image: {
     height: '80px',
   },
+
+  deleteButton: {
+    color: 'white',
+    backgroundColor: 'red',
+    '&:hover': {
+      backgroundColor: 'red',
+    },
+  },
 })
 
 export default styles

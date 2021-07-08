@@ -11,6 +11,11 @@ import { RootState } from '../../redux/store'
 import { useEffect } from 'react'
 import { resetError } from '../../redux/reducers/authSlice'
 
+type Values = {
+  email: string
+  password: string
+}
+
 const Login = () => {
   const classes = styles()
   const history = useHistory()
@@ -19,7 +24,7 @@ const Login = () => {
     (state: RootState) => state.auth
   )
 
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<Values>({
     email: '',
     password: '',
   })

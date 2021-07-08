@@ -19,6 +19,8 @@ import CreateProduct from './pages/admin/CreateProduct'
 import AdminRoute from './routes/AdminRoute'
 import UploadProductImages from './pages/admin/UploadProductImages'
 import UpdateProduct from './pages/admin/UpdateProduct'
+import UploadAboutDetails from './pages/admin/UploadAboutDetails'
+import UploadSiteRultes from './pages/admin/UploadSiteRules'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -37,6 +39,7 @@ const App: React.FC = () => {
               <Route path='/cart' exact component={Cart} />
               <Route path='/login' exact component={Login} />
               <Route path='/register' exact component={Register} />
+
               {/* admin pages */}
               <AdminRoute path='/admin/dashboard' exact component={Dashboard} />
               <AdminRoute path='/admin/orders' exact component={Orders} />
@@ -62,6 +65,17 @@ const App: React.FC = () => {
                 exact
                 component={UpdateProduct}
               />
+              <AdminRoute
+                path='/admin/upload-about-me-details'
+                exact
+                component={UploadAboutDetails}
+              />
+              <AdminRoute
+                path='/admin/upload-site-rules'
+                exact
+                component={UploadSiteRultes}
+              />
+
               {/* user pages */}
               <PrivateRoute
                 path='/user/dashboard'

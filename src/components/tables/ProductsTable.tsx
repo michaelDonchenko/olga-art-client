@@ -20,14 +20,14 @@ import {
   setPage,
   setProductToUpdate,
 } from '../../redux/reducers/productSlice'
+import PaginationControll from '../pagination/PaginationControll'
 
 const ProductsTable = () => {
   const classes = styles()
   const history = useHistory()
 
-  const { products, loading, successMessage, page, queryObj } = useSelector(
-    (state: RootState) => state.product
-  )
+  const { products, loading, successMessage, page, pages, queryObj } =
+    useSelector((state: RootState) => state.product)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -129,6 +129,12 @@ const ProductsTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {!loading && pages > 1 && (
+        <div>
+          <PaginationControll page={page} pages={pages} setPage={setPage} />
+        </div>
+      )}
     </>
   )
 }

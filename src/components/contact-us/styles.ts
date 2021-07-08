@@ -23,7 +23,8 @@ const styles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '350px',
+    height: 'fit-content',
+    minHeight: '350px',
   },
 
   formElement: {

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { AxiosResponse } from 'axios'
 import {
+  addProductToWishlist,
   createProduct,
   deleteProduct,
   getProduct,
@@ -169,6 +170,24 @@ export const randomProducts = createAsyncThunk(
       })
 
       return items
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const addToWishlist = createAsyncThunk(
+  'product/addToWishlist',
+  async (productId: string, { rejectWithValue }) => {
+    type addToWishlistResponse = {
+      message: string
+    }
+
+    try {
+      const response: AxiosResponse<addToWishlistResponse> =
+        await addProductToWishlist(productId)
+
+      return response
     } catch (error) {
       return rejectWithValue(error.response.data)
     }

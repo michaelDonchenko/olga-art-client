@@ -31,7 +31,7 @@ const styles = makeStyles({
   },
 
   linkSpan: {
-    color: '#20B2AA',
+    color: '#FF69B4',
     cursor: 'pointer',
     margin: '0 4px',
   },

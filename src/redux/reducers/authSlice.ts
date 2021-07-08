@@ -1,8 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Cookies from 'universal-cookie'
-import { login, logout, register } from '../actions/auth'
+import { login, logout, register, users } from '../actions/auth'
 
 const cookies = new Cookies()
+
+type User = {
+  email: string
+  verified: boolean
+  role: string
+  createdAt: string
+}
 
 export interface UserI {
   role: 'admin' | 'subscriber'
@@ -18,6 +25,9 @@ interface initialStateI {
   loading: boolean
   successMessage: boolean | string
   errorMessage: boolean | string
+  page: number
+  pages: number
+  users: null | User[]
 }
 
 const initialState: initialStateI = {
@@ -25,6 +35,9 @@ const initialState: initialStateI = {
   loading: false,
   successMessage: false,
   errorMessage: false,
+  page: 1,
+  pages: 0,
+  users: null,
 }
 
 const authSlice = createSlice({
@@ -33,6 +46,9 @@ const authSlice = createSlice({
   reducers: {
     resetError: (state) => {
       state.errorMessage = false
+    },
+    setPage: (state, action) => {
+      state.page = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -82,8 +98,24 @@ const authSlice = createSlice({
           ? (state.errorMessage = action.payload.errors[0].msg)
           : (state.errorMessage = action.payload.message)
       })
+      //get users
+      .addCase(users.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(users.fulfilled, (state, action) => {
+        state.loading = false
+        state.users = action.payload.data.users
+        state.pages = action.payload.data.pages
+        state.errorMessage = false
+      })
+      .addCase(users.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.errorMessage = action.payload.errors[0].msg)
+          : (state.errorMessage = action.payload.message)
+      })
   },
 })
 
-export const { resetError } = authSlice.actions
+export const { resetError, setPage } = authSlice.actions
 export default authSlice.reducer

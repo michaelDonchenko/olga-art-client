@@ -11,6 +11,7 @@ import UploadProductImagesForm from '../../components/admin-create-product/Uploa
 import { Product, resetSuccessMessage } from '../../redux/reducers/productSlice'
 import UploadedImagesPreview from '../../components/admin-create-product/UploadedImagesPreview'
 import Loader from '../../components/loader'
+import AdminMobileSidenav from '../../components/admin-sidenav/AdminMobileSidenav'
 
 const UploadProductImages = () => {
   type Params = {
@@ -30,7 +31,9 @@ const UploadProductImages = () => {
 
   useEffect(() => {
     dispatch(getProduct(id))
+  }, [])
 
+  useEffect(() => {
     return () => handleSuccessMessageReset()
   }, [])
 
@@ -42,6 +45,10 @@ const UploadProductImages = () => {
 
       {/* content div */}
       <div className={classes.contentDiv}>
+        <Hidden smUp>
+          <AdminMobileSidenav />
+        </Hidden>
+
         <Typography align='center' variant='h5' className={classes.mainHeader}>
           Upload Product Images
         </Typography>

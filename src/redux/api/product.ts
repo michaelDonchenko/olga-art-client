@@ -35,3 +35,6 @@ export const updateProduct = async (values: productValues, id: string) =>
 
 export const deleteProduct = async (id: string) =>
   await axios.delete(`${server_url}/product/delete/${id}`)
+
+export const addProductToWishlist = async (productId: string) =>
+  await axios.post(`${server_url}/product/add-to-wishlist`, { productId })

@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import { Paper } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import styles from './styles'
 import { useDispatch } from 'react-redux'
@@ -18,8 +17,8 @@ const AdminSidenav = () => {
   }
 
   const activeLinkStyles = {
-    border: '1px solid #FFB6C1',
-    backgroundColor: '#fce4ec',
+    border: '1px solid #181818',
+    backgroundColor: '#D3D3D3',
   }
 
   return (

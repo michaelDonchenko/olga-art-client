@@ -7,6 +7,7 @@ import { categories as getCategories } from '../../redux/actions/categories'
 import Loader from '../loader'
 import { useHistory } from 'react-router'
 import { setCategory } from '../../redux/reducers/productSlice'
+import { Typography } from '@material-ui/core'
 
 const Categories = () => {
   const classes = styles()
@@ -30,21 +31,25 @@ const Categories = () => {
   }
 
   return (
-    <div className={classes.container}>
-      {loading && <Loader />}
-      {categories.length > 0 &&
-        categories.map((c, i) => (
-          <Button
-            variant='outlined'
-            onClick={() => handleClick(c)}
-            key={i}
-            className={classes.element}
-            color='primary'
-          >
-            {c.name}
-          </Button>
-        ))}
-    </div>
+    <>
+      <Typography className={classes.header} align='center' variant='h4'>
+        Categories
+      </Typography>
+      <div className={classes.container}>
+        {loading && <Loader />}
+        {categories.length > 0 &&
+          categories.map((c, i) => (
+            <Button
+              onClick={() => handleClick(c)}
+              key={i}
+              className={classes.element}
+              color='primary'
+            >
+              {c.name}
+            </Button>
+          ))}
+      </div>
+    </>
   )
 }
 

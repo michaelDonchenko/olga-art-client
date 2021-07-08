@@ -5,6 +5,7 @@ import {
   loginObj,
   loginUser,
   logoutUser,
+  getUsers,
 } from '../api/auth'
 import { AxiosResponse } from 'axios'
 import Cookies from 'universal-cookie'
@@ -61,6 +62,31 @@ export const logout = createAsyncThunk(
       if (response) {
         cookie.remove('user')
       }
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const users = createAsyncThunk(
+  'auth/users',
+  async (page: number, { rejectWithValue }) => {
+    type User = {
+      email: string
+      verified: boolean
+      role: string
+      createdAt: string
+    }
+
+    type usersResponse = {
+      users: User[]
+      pages: number
+    }
+
+    try {
+      const response: AxiosResponse<usersResponse> = await getUsers(page)
+
       return response
     } catch (error) {
       return rejectWithValue(error.response.data)

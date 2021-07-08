@@ -1,6 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import adminSlice from './reducers/adminSlice'
 import authSlice from './reducers/authSlice'
+import cartSlice from './reducers/cartSlice'
 import categoriesSlice from './reducers/categoriesSlice'
+import messageSlice from './reducers/messageSlice'
+import modalSlice from './reducers/modalSlice'
 import productSlice from './reducers/productSlice'
 
 export const store = configureStore({
@@ -8,6 +12,10 @@ export const store = configureStore({
     auth: authSlice,
     category: categoriesSlice,
     product: productSlice,
+    cart: cartSlice,
+    admin: adminSlice,
+    message: messageSlice,
+    modal: modalSlice,
   },
 })
 

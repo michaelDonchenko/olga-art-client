@@ -29,7 +29,7 @@ const styles = makeStyles({
   footerDiv: { marginTop: '30px' },
 
   linkSpan: {
-    color: '#20B2AA',
+    color: '#FF69B4',
     cursor: 'pointer',
     margin: '0 4px',
   },

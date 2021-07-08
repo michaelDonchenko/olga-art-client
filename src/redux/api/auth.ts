@@ -21,3 +21,6 @@ export const loginUser = async (obj: loginObj) =>
 
 export const logoutUser = async () =>
   await axios.get(`${server_url}/auth/logout`)
+
+export const getUsers = async (page: number) =>
+  await axios.get(`${server_url}/auth/users?page=${page}`)

@@ -15,6 +15,16 @@ const styles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: '30px',
+  },
+
+  gridItem: {
+    padding: '7px',
+  },
+
+  link: {
+    textDecoration: 'none',
+    color: '#FF69B4',
   },
 })
 

@@ -1,9 +1,11 @@
 import { Typography } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import styles from './styles'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
 const WelcomeMessage: React.FC = () => {
-  const user = false
+  const { user } = useSelector((state: RootState) => state.auth)
   const history = useHistory()
   const classes = styles()
 
@@ -22,7 +24,8 @@ const WelcomeMessage: React.FC = () => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant='h5' align='center'>
-          Hello {user} welcome back.
+          Hello <span className={classes.name}>{user.email.split('@')[0]}</span>
+          , welcome back.
         </Typography>
       )}
     </div>

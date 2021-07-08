@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
   appBar: {
-    backgroundColor: '#20B2AA',
+    backgroundColor: '#181818',
   },
 
   tooBar: {
@@ -20,7 +20,7 @@ const styles = makeStyles({
     textDecoration: 'none',
     marginRight: '20px',
     padding: '0 3px',
-    borderBottom: '2px solid #20B2AA',
+    borderBottom: '2px solid #181818',
     '&:hover': {
       borderBottom: '2px solid white',
     },

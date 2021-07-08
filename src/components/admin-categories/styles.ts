@@ -50,7 +50,7 @@ const styles = makeStyles({
   },
 
   updateIcon: {
-    color: '#20B2AA',
+    color: '#181818',
     '&:hover': {
       cursor: 'pointer',
     },

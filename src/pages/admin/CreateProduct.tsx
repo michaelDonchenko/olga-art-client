@@ -6,8 +6,12 @@ import { Hidden } from '@material-ui/core'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-import { resetSuccessMessage } from '../../redux/reducers/productSlice'
+import {
+  resetCreatedProductId,
+  resetSuccessMessage,
+} from '../../redux/reducers/productSlice'
 import { useHistory } from 'react-router'
+import AdminMobileSidenav from '../../components/admin-sidenav/AdminMobileSidenav'
 
 const CreateProduct = () => {
   const classes = styles()
@@ -20,6 +24,7 @@ const CreateProduct = () => {
 
   const handleSuccessReset = () => {
     dispatch(resetSuccessMessage())
+    dispatch(resetCreatedProductId())
   }
 
   if (successMessage && createdProductId) {
@@ -38,6 +43,10 @@ const CreateProduct = () => {
 
       {/* content div */}
       <div className={classes.contentDiv}>
+        <Hidden smUp>
+          <AdminMobileSidenav />
+        </Hidden>
+
         <Typography align='center' variant='h5' className={classes.mainHeader}>
           Create new Product
         </Typography>

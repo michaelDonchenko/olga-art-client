@@ -4,12 +4,15 @@ const styles = makeStyles({
   mainContainer: {
     width: '100%',
     display: 'flex',
+    maxWidth: '100%',
   },
 
   contentDiv: {
+    margin: '20px 0',
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    overflowX: 'auto',
   },
 
   mainHeader: {

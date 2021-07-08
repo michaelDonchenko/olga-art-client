@@ -1,9 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
-import { setPage } from '../../redux/reducers/productSlice'
-import { RootState } from '../../redux/store'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,10 +16,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function PaginationControll() {
+interface Props {
+  page: number
+  pages: number
+  setPage: (value: number) => void
+}
+
+export default function PaginationControll({ page, pages, setPage }: Props) {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const { page, pages } = useSelector((state: RootState) => state.product)
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(setPage(value))

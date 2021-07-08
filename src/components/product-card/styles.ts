@@ -2,12 +2,12 @@ import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
   root: {
-    width: 340,
+    width: 350,
     maxWidth: '95%',
     height: 'fit-content',
     backgroundColor: 'white',
     boxShadow: '',
-    margin: '15px 20px',
+    margin: '15px 10px',
     border: '1px solid ',
     borderColor: '#e1f5fe',
     '&:hover': {
@@ -17,7 +17,7 @@ const styles = makeStyles({
   },
 
   productName: {
-    padding: '10px',
+    padding: '7px',
   },
 
   link: {
@@ -32,8 +32,8 @@ const styles = makeStyles({
   },
 
   productInfo: {
-    padding: '10px',
-    margin: '10px 0',
+    padding: '5px',
+    margin: '2px 0',
   },
 
   productSpan: {

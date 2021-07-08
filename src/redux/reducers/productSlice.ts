@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { productImageDelete, productImageUpload } from '../actions/cloudinary'
 import {
+  addToWishlist,
   create,
   product,
   products,
@@ -53,6 +54,9 @@ interface initialStateI {
   successMessage: boolean | string
   errorMessage: boolean | string
   loading: boolean
+  addToWishlistSuccess: boolean | string
+  addToWishlistError: boolean | string
+  wishlistLoading: boolean
 }
 
 const initialState: initialStateI = {
@@ -71,6 +75,9 @@ const initialState: initialStateI = {
   successMessage: false,
   errorMessage: false,
   loading: false,
+  addToWishlistSuccess: false,
+  addToWishlistError: false,
+  wishlistLoading: false,
 }
 
 const productSlice = createSlice({
@@ -107,6 +114,12 @@ const productSlice = createSlice({
         category: '',
         productsToDisplay: 'all',
       }
+    },
+    resetCreatedProductId: (state) => {
+      state.createdProductId = null
+    },
+    resetAddToWishlistSuccess: (state) => {
+      state.addToWishlistSuccess = false
     },
   },
   extraReducers: (builder) => {
@@ -242,6 +255,19 @@ const productSlice = createSlice({
           ? (state.errorMessage = action.payload.errors[0].msg)
           : (state.errorMessage = action.payload.message)
       })
+      //add product to wishlist
+      .addCase(addToWishlist.pending, (state, action) => {
+        state.wishlistLoading = true
+      })
+      .addCase(addToWishlist.fulfilled, (state, action) => {
+        state.wishlistLoading = false
+        state.addToWishlistSuccess = action.payload.data.message
+        state.errorMessage = false
+      })
+      .addCase(addToWishlist.rejected, (state, action: PayloadAction<any>) => {
+        state.wishlistLoading = false
+        state.addToWishlistError = action.payload.message
+      })
   },
 })
 
@@ -254,6 +280,8 @@ export const {
   resetQueryObj,
   setSort,
   setProductToDisplay,
+  resetCreatedProductId,
+  resetAddToWishlistSuccess,
 } = productSlice.actions
 
 export default productSlice.reducer
