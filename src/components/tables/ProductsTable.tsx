@@ -9,7 +9,10 @@ import Paper from '@material-ui/core/Paper'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { useEffect } from 'react'
-import { products as getProducts, remove } from '../../redux/actions/product'
+import {
+  adminProducts as getAdminProducts,
+  remove,
+} from '../../redux/actions/product'
 import { Button } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import Loader from '../loader'
@@ -26,13 +29,14 @@ const ProductsTable = () => {
   const classes = styles()
   const history = useHistory()
 
-  const { products, loading, successMessage, page, pages, queryObj } =
-    useSelector((state: RootState) => state.product)
+  const { adminProducts, loading, successMessage, page, pages } = useSelector(
+    (state: RootState) => state.product
+  )
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getProducts({ page, queryObj }))
-  }, [page, queryObj])
+    dispatch(getAdminProducts(page))
+  }, [page])
 
   const handleStateReset = () => {
     dispatch(setPage(1))
@@ -59,7 +63,7 @@ const ProductsTable = () => {
 
   if (successMessage === 'Product deleted succefully') {
     dispatch(resetSuccessMessage())
-    dispatch(getProducts({ page, queryObj }))
+    dispatch(getAdminProducts(page))
   }
 
   return (
@@ -78,12 +82,18 @@ const ProductsTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {products &&
-              products.length > 0 &&
-              products.map((p, i) => (
+            {adminProducts &&
+              adminProducts.length > 0 &&
+              adminProducts.map((p, i) => (
                 <TableRow key={i}>
                   <TableCell align='right'>{p.name}</TableCell>
-                  <TableCell align='right'>{p.category.name}</TableCell>
+                  <TableCell align='right'>
+                    {p.category ? (
+                      p.category.name
+                    ) : (
+                      <span style={{ color: 'red' }}>No category found!</span>
+                    )}
+                  </TableCell>
                   <TableCell align='right'>
                     {p.images.length ? (
                       <img

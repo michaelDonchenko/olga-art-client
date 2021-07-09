@@ -26,6 +26,8 @@ export type Product = {
 
 interface InitialStateI {
   products: Product[] | null
+  delivery: string
+  paymentMethod: string
 }
 
 let cartFromLocalstorage = localStorage.getItem('cart')
@@ -33,6 +35,8 @@ let cartFromLocalstorage = localStorage.getItem('cart')
 const initialState: InitialStateI = {
   products:
     cartFromLocalstorage !== null ? JSON.parse(cartFromLocalstorage) : null,
+  delivery: '',
+  paymentMethod: '',
 }
 
 const cartSlice = createSlice({
@@ -42,12 +46,18 @@ const cartSlice = createSlice({
     setCart: (state, action) => {
       state.products = action.payload
     },
+    setDelivey: (state, action) => {
+      state.delivery = action.payload
+    },
+    setPaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload
+    },
   },
   extraReducers: (builder) => {
     //comment
   },
 })
 
-export const { setCart } = cartSlice.actions
+export const { setCart, setDelivey, setPaymentMethod } = cartSlice.actions
 
 export default cartSlice.reducer

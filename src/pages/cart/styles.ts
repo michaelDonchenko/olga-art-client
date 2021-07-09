@@ -15,7 +15,8 @@ const styles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '30px',
+    marginBottom: '15px',
+    color: 'gray',
   },
 
   gridItem: {
@@ -38,7 +39,23 @@ const styles = makeStyles({
 
   paragraph: {
     padding: '2px 5px',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  checkoutButton: {
+    margin: '25px auto',
+    maxWidth: '100%',
+    width: '300px',
+    display: 'flex',
+    alignSelf: 'center',
+    backgroundColor: 'green',
     fontSize: '16px',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'forestGreen',
+    },
   },
 })
 

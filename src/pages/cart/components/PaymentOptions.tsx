@@ -6,9 +6,14 @@ import {
   Radio,
 } from '@material-ui/core'
 import styles from '../styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../../redux/store'
+import { setPaymentMethod } from '../../../redux/reducers/cartSlice'
 
 const PaymentOptions = () => {
   const classes = styles()
+  const dispatch = useDispatch()
+  const { paymentMethod } = useSelector((state: RootState) => state.cart)
 
   return (
     <div className={classes.optionsSection}>
@@ -18,20 +23,32 @@ const PaymentOptions = () => {
 
       <div className={classes.optionsSection}>
         <FormControl component='fieldset'>
-          <RadioGroup aria-label='delivery'>
+          <RadioGroup value={paymentMethod} aria-label='delivery'>
             <FormControlLabel
-              value='0'
-              control={<Radio />}
+              value='bank'
+              control={
+                <Radio
+                  onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+                />
+              }
               label='Direct bank transfer'
             />
             <FormControlLabel
-              value='1'
-              control={<Radio />}
+              value='phone'
+              control={
+                <Radio
+                  onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+                />
+              }
               label='Pay by phone (credit card, bit or any other)'
             />
             <FormControlLabel
-              value='2'
-              control={<Radio />}
+              value='paypal'
+              control={
+                <Radio
+                  onChange={(e) => dispatch(setPaymentMethod(e.target.value))}
+                />
+              }
               label='PayPal (+5% to total price)'
             />
           </RadioGroup>

@@ -24,6 +24,9 @@ export const getProducts = async (page: number, quertyObj: QueryObj) =>
     `${server_url}/product/products?page=${page}&sort=${quertyObj.sort}&category=${quertyObj.category}&products=${quertyObj.productsToDisplay}`
   )
 
+export const getAdminProducts = async (page: number) =>
+  await axios.get(`${server_url}/product/admin-products?page=${page}`)
+
 export const getRandomProducts = async () =>
   await axios.get(`${server_url}/product/get-random-products`)
 

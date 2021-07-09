@@ -35,6 +35,9 @@ const SingelProduct = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             {loading && <Loader />}
+            {!loading && productImages.length === 0 && (
+              <p>No images yet for this product.</p>
+            )}
             {!loading && productImages.length > 0 && (
               <div style={{ padding: '20px 10px' }}>
                 <ImageGallery

@@ -59,7 +59,7 @@ const UpdateProductForm = () => {
     dispatch(getCategories())
     setValues({
       ...values,
-      category: (productToUpdate as Product).category._id,
+      category: (productToUpdate as Product).category?._id,
     })
 
     return () => handleResetMessage()
@@ -81,42 +81,42 @@ const UpdateProductForm = () => {
       <form className={classes.formContainer} onSubmit={handleSubmit}>
         <TextField
           className={classes.formElement}
-          label="Name"
-          name="name"
-          type="text"
+          label='Name'
+          name='name'
+          type='text'
           required={true}
-          variant="outlined"
+          variant='outlined'
           value={name}
           onChange={(e) => HandleChange(e, values, setValues)}
         />
         <TextField
           className={classes.formElement}
-          label="Price"
-          name="price"
-          type="number"
-          variant="outlined"
+          label='Price'
+          name='price'
+          type='number'
+          variant='outlined'
           required={true}
           value={price}
           onChange={(e) => HandleChange(e, values, setValues)}
         />
         <TextField
           className={classes.formElement}
-          label="Quantity"
-          name="quantity"
-          type="number"
-          variant="outlined"
+          label='Quantity'
+          name='quantity'
+          type='number'
+          variant='outlined'
           required={true}
           value={quantity}
           onChange={(e) => HandleChange(e, values, setValues)}
         />
 
         <FormControl required className={classes.formElement}>
-          <InputLabel id="category">Select a Category</InputLabel>
+          <InputLabel id='category'>Select a Category</InputLabel>
           <Select
             value={category}
             required={true}
-            name="category"
-            labelId="category"
+            name='category'
+            labelId='category'
             onChange={(e) => setValues({ ...values, category: e.target.value })}
           >
             {!loading &&
@@ -132,11 +132,11 @@ const UpdateProductForm = () => {
         <TextField
           className={classes.formElement}
           multiline
-          rows={5}
+          rows={10}
           label={'Product Description'}
-          name="description"
-          type="text"
-          variant="outlined"
+          name='description'
+          type='text'
+          variant='outlined'
           required={true}
           value={description}
           onChange={(e) => HandleChange(e, values, setValues)}
@@ -145,17 +145,17 @@ const UpdateProductForm = () => {
         {successMessage && ShowSuccess(successMessage)}
 
         <Button
-          type="submit"
-          variant="contained"
+          type='submit'
+          variant='contained'
           className={classes.formElement}
-          color="primary"
+          color='primary'
         >
           Update Details
         </Button>
         <Button
-          variant="outlined"
+          variant='outlined'
           className={classes.formElement}
-          color="secondary"
+          color='secondary'
           onClick={() => history.push('/admin/products')}
         >
           Back to Products

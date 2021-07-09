@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { productImageDelete, productImageUpload } from '../actions/cloudinary'
 import {
   addToWishlist,
+  adminProducts,
   create,
   product,
   products,
@@ -50,6 +51,7 @@ interface initialStateI {
   product: undefined | Product
   productImages: SingleProductImage[]
   products: any[]
+  adminProducts: any[]
   pages: number
   page: number
   queryObj: {
@@ -72,6 +74,7 @@ const initialState: initialStateI = {
   product: undefined,
   productImages: [],
   products: [],
+  adminProducts: [],
   pages: 0,
   page: 1,
   queryObj: {
@@ -162,6 +165,23 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(products.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.errorMessage = action.payload.errors[0].msg)
+          : (state.errorMessage = action.payload.message)
+      })
+      //get admin products
+      .addCase(adminProducts.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(adminProducts.fulfilled, (state, action) => {
+        state.loading = false
+        state.adminProducts = action.payload.data.products
+        state.pages = action.payload.data.pages
+        state.page = action.payload.data.page
+        state.errorMessage = false
+      })
+      .addCase(adminProducts.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false
         action.payload.errors
           ? (state.errorMessage = action.payload.errors[0].msg)

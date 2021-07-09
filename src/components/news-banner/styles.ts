@@ -9,7 +9,7 @@ const styles = makeStyles({
   },
 
   img: {
-    maxWidth: '100%',
+    width: '100%',
   },
 })
 

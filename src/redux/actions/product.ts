@@ -4,6 +4,7 @@ import {
   addProductToWishlist,
   createProduct,
   deleteProduct,
+  getAdminProducts,
   getProduct,
   getProducts,
   getRandomProducts,
@@ -201,6 +202,34 @@ export const addToWishlist = createAsyncThunk(
     try {
       const response: AxiosResponse<addToWishlistResponse> =
         await addProductToWishlist(productId)
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const adminProducts = createAsyncThunk(
+  'product/adminProducts',
+  async (page: number, { rejectWithValue }) => {
+    type products = {
+      name: string
+      price: number
+      quantity: number
+      category: string
+      description: string
+      images?: any[]
+    }
+    type getProductsResponse = {
+      products: products[]
+      pages: number
+      page: number
+    }
+
+    try {
+      const response: AxiosResponse<getProductsResponse> =
+        await getAdminProducts(page)
 
       return response
     } catch (error) {

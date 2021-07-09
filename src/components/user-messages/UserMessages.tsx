@@ -7,7 +7,11 @@ import Loader from '../loader'
 import { messages as getMessages } from '../../redux/actions/message'
 import Message from './Message'
 import PaginationControll from '../pagination/PaginationControll'
-import { setPage } from '../../redux/reducers/messageSlice'
+import {
+  setPage,
+  resetErrorMessage,
+  resetSuccessMessage,
+} from '../../redux/reducers/messageSlice'
 
 const UserMessages = () => {
   const classes = styles()
@@ -17,8 +21,15 @@ const UserMessages = () => {
     (state: RootState) => state.message
   )
 
+  const handleReset = () => {
+    dispatch(resetSuccessMessage())
+    dispatch(resetErrorMessage())
+  }
+
   useEffect(() => {
     dispatch(getMessages(page))
+
+    return () => handleReset()
   }, [page])
 
   return (

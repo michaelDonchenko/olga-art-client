@@ -105,7 +105,7 @@ const CreateProductForm = () => {
         <TextField
           className={classes.formElement}
           multiline
-          rows={5}
+          rows={10}
           label={'Product Description'}
           name='description'
           type='text'

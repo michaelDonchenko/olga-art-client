@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { product as getProduct } from '../../redux/actions/product'
 import { useParams } from 'react-router'
 import UploadProductImagesForm from '../../components/admin-create-product/UploadProductImagesForm'
-import { Product, resetSuccessMessage } from '../../redux/reducers/productSlice'
+import { resetSuccessMessage } from '../../redux/reducers/productSlice'
 import UploadedImagesPreview from '../../components/admin-create-product/UploadedImagesPreview'
 import Loader from '../../components/loader'
 import AdminMobileSidenav from '../../components/admin-sidenav/AdminMobileSidenav'
@@ -55,17 +55,15 @@ const UploadProductImages = () => {
 
         {loading && <Loader />}
 
-        {!loading && (product as Product)._id && (
+        {!loading && product?._id && (
           <>
             <UploadProductImagesForm />
 
-            {(product as Product).images?.length ? (
-              <UploadedImagesPreview />
-            ) : null}
+            {product?.images?.length ? <UploadedImagesPreview /> : null}
           </>
         )}
 
-        {!loading && !(product as Product)._id && (
+        {!loading && !product?._id && (
           <p className={classes.errorText}>
             We're sorry the product could not be found...
           </p>
