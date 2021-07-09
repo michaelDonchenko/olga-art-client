@@ -12,9 +12,9 @@ const styles = makeStyles({
 
   deleteButton: {
     color: 'white',
-    backgroundColor: 'red',
+    backgroundColor: '#c62828',
     '&:hover': {
-      backgroundColor: 'red',
+      backgroundColor: '#b71c1c',
     },
   },
 })

@@ -67,17 +67,32 @@ export const products = createAsyncThunk(
 export const product = createAsyncThunk(
   'product/product',
   async (id: string, { rejectWithValue }) => {
+    type SingleProductImage = {
+      original: string
+      thumbnail: string
+    }
+
+    type category = {
+      _id: string
+      name: string
+    }
+
     type product = {
       _id: string
       name: string
       price: number
       quantity: number
-      category: string
+      category: category
       description: string
       images?: any[]
+      sold: number
+      createdAt: string
+      updatedAt: string
+      wishlist: string[]
     }
     type getProductsResponse = {
       product: product
+      images: SingleProductImage[]
     }
 
     try {

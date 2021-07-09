@@ -17,12 +17,18 @@ type Image = {
 
 type Category = {
   _id: string
+  name: string
 }
 
 type RandomProduct = {
   productId: string
   original: string
   description: string
+}
+
+type SingleProductImage = {
+  original: string
+  thumbnail: string
 }
 
 export type Product = {
@@ -36,10 +42,13 @@ export type Product = {
   category: Category
   createdAt: string
   updatedAt: string
+  count?: number
+  wishlist: string[]
 }
 
 interface initialStateI {
-  product: {} | Product
+  product: undefined | Product
+  productImages: SingleProductImage[]
   products: any[]
   pages: number
   page: number
@@ -60,7 +69,8 @@ interface initialStateI {
 }
 
 const initialState: initialStateI = {
-  product: {},
+  product: undefined,
+  productImages: [],
   products: [],
   pages: 0,
   page: 1,
@@ -164,6 +174,7 @@ const productSlice = createSlice({
       .addCase(product.fulfilled, (state, action) => {
         state.loading = false
         state.product = action.payload.data.product
+        state.productImages = action.payload.data.images
         state.errorMessage = false
       })
       .addCase(product.rejected, (state, action: PayloadAction<any>) => {

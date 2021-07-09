@@ -7,6 +7,7 @@ import {
   Paper,
   TableCell,
   TableBody,
+  TextField,
 } from '@material-ui/core'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
@@ -45,6 +46,36 @@ const CartTable = () => {
     }
   }
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>,
+    p: Product
+  ) => {
+    let cart = localStorage.getItem('cart')
+    let parsedCart: any[] = []
+
+    if (typeof cart === 'string') {
+      parsedCart = JSON.parse(cart)
+    }
+
+    parsedCart.map((product, i) => {
+      if (product._id === p._id) {
+        parsedCart[i].count = Number(e.target.value)
+
+        if (parsedCart[i].count > p.quantity) {
+          return //count cannot be bigger than quantity
+        }
+
+        if (parsedCart[i].count < 1) {
+          return //count cannt be less than 1
+        }
+
+        localStorage.setItem('cart', JSON.stringify(parsedCart))
+
+        dispatch(setCart(parsedCart))
+      }
+    })
+  }
+
   return (
     <TableContainer className={classes.table} component={Paper}>
       <Table aria-label='simple table'>
@@ -75,7 +106,13 @@ const CartTable = () => {
               <TableCell>{p.name}</TableCell>
               <TableCell>{p.category.name}</TableCell>
               <TableCell>{p.price}₪</TableCell>
-              <TableCell>{p.count}</TableCell>
+              <TableCell>
+                <TextField
+                  onChange={(e) => handleChange(e, p)}
+                  value={p.count}
+                  type='number'
+                ></TextField>
+              </TableCell>
               <TableCell>
                 <Button
                   className={classes.deleteButton}

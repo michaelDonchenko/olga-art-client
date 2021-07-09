@@ -5,6 +5,9 @@ import CartTable from '../../components/tables/CartTable'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { Link } from 'react-router-dom'
+import DeliveryOptions from './components/DeliveryOptions'
+import PaymentOptions from './components/PaymentOptions'
+import CartSummary from './components/CartSummary'
 
 const Cart = () => {
   const classes = styles()
@@ -27,10 +30,16 @@ const Cart = () => {
               in order to continue shopping
             </Typography>
           ) : (
-            <CartTable />
+            <>
+              <CartTable />
+              <DeliveryOptions />
+              <PaymentOptions />
+            </>
           )}
         </Grid>
-        <Grid item xs={12} md={4}></Grid>
+        <Grid item xs={12} md={4}>
+          <CartSummary />
+        </Grid>
       </Grid>
     </div>
   )

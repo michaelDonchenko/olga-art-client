@@ -18,6 +18,7 @@ const styles = makeStyles({
 
   productName: {
     padding: '7px',
+    cursor: 'pointer',
   },
 
   link: {
@@ -58,6 +59,10 @@ const styles = makeStyles({
     color: 'grayText',
     fontSize: '16px',
     textAlign: 'center',
+  },
+
+  productLink: {
+    cursor: 'pointer',
   },
 })
 

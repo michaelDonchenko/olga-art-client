@@ -37,9 +37,6 @@ const ActionButtons: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch()
 
   const { user } = useSelector((state: RootState) => state.auth)
-  const { wishlistLoading, products } = useSelector(
-    (state: RootState) => state.product
-  )
 
   const handleAddToCart = () => {
     setOpen(true)
@@ -118,11 +115,7 @@ const ActionButtons: React.FC<Props> = ({ product }) => {
         color='secondary'
         disabled={!user}
       >
-        {wishlistLoading
-          ? 'Loading...'
-          : wishlistStatus
-          ? 'Remove from Wishlist'
-          : 'Add to Wishlist'}
+        {wishlistStatus ? 'Remove from Wishlist' : 'Add to Wishlist'}
       </Button>
     </div>
   )

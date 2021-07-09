@@ -32,22 +32,24 @@ const HomeCarousel: React.FC = () => {
       <Grid item xs={12} sm={5}>
         {loading && <Loader />}
         {!loading && randomProducts.length > 0 && (
-          <ImageGallery
-            showPlayButton={false}
-            autoPlay={true}
-            slideInterval={5000}
-            slideDuration={500}
-            showThumbnails={false}
-            items={randomProducts}
-            showBullets={true}
-            showNav={true}
-            onClick={(e: any) => {
-              const foundProduct = randomProducts.find(
-                (p) => p.original === e.target.src
-              )
-              history.push(`/product/${foundProduct?.productId}`)
-            }}
-          />
+          <div style={{ cursor: 'pointer' }}>
+            <ImageGallery
+              showPlayButton={false}
+              autoPlay={true}
+              slideInterval={5000}
+              slideDuration={500}
+              showThumbnails={false}
+              items={randomProducts}
+              showBullets={true}
+              showNav={true}
+              onClick={(e: any) => {
+                const foundProduct = randomProducts.find(
+                  (p) => p.original === e.target.src
+                )
+                history.push(`/product/${foundProduct?.productId}`)
+              }}
+            />
+          </div>
         )}
       </Grid>
     </Grid>

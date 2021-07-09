@@ -21,6 +21,7 @@ import UploadProductImages from './pages/admin/UploadProductImages'
 import UpdateProduct from './pages/admin/UpdateProduct'
 import UploadAboutDetails from './pages/admin/UploadAboutDetails'
 import UploadSiteRultes from './pages/admin/UploadSiteRules'
+import SingelProduct from './pages/single product/SingelProduct'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -39,6 +40,7 @@ const App: React.FC = () => {
               <Route path='/cart' exact component={Cart} />
               <Route path='/login' exact component={Login} />
               <Route path='/register' exact component={Register} />
+              <Route path='/product/:id' exact component={SingelProduct} />
 
               {/* admin pages */}
               <AdminRoute path='/admin/dashboard' exact component={Dashboard} />
