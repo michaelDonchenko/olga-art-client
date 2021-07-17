@@ -15,7 +15,7 @@ const Cart = () => {
 
   return (
     <div className={classes.mainContainer}>
-      <Typography className={classes.title} variant='h4'>
+      <Typography align='center' className={classes.mainTitle} variant='h4'>
         Your Cart <ShoppingCartIcon className={classes.titleIcon} />
       </Typography>
 

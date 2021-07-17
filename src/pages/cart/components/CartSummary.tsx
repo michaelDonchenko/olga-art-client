@@ -1,15 +1,20 @@
 import { Typography, Button } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { saveCart } from '../../../redux/actions/cart'
 import { RootState } from '../../../redux/store'
 import styles from '../styles'
+import { useHistory } from 'react-router'
+import { useEffect } from 'react'
+import { clearSuccess } from '../../../redux/reducers/cartSlice'
 
 const CartSummary = () => {
-  const { products, delivery, paymentMethod } = useSelector(
-    (state: RootState) => state.cart
-  )
+  const { products, delivery, paymentMethod, successMessage, loading, cartId } =
+    useSelector((state: RootState) => state.cart)
   const { user } = useSelector((state: RootState) => state.auth)
   const classes = styles()
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   const getProductsTotal = () => {
     let productsTotal = 0
@@ -41,9 +46,27 @@ const CartSummary = () => {
     return Math.round(total)
   }
 
+  const handleClear = () => {
+    dispatch(clearSuccess())
+  }
+
+  const handelSubmit = () => {
+    if (products !== null) {
+      dispatch(saveCart({ products, delivery, paymentMethod }))
+    }
+  }
+
+  if (successMessage === 'Cart created succefully on DB' && cartId !== '') {
+    history.push(`/checkout/${cartId}`)
+  }
+
+  useEffect(() => {
+    return () => handleClear()
+  }, [])
+
   return (
     <div className={classes.cartSummary}>
-      <Typography className={classes.title} align='center' variant='h4'>
+      <Typography className={classes.mainTitle} align='center' variant='h4'>
         Cart Summary:
       </Typography>
       <hr></hr>
@@ -103,8 +126,9 @@ const CartSummary = () => {
           variant='contained'
           className={classes.checkoutButton}
           disabled={!products?.length || !paymentMethod || !delivery}
+          onClick={handelSubmit}
         >
-          Continue to checkout
+          {loading ? 'Loading...' : 'Continue to checkout'}
         </Button>
       )}
     </div>

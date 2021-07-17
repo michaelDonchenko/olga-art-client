@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
   container: {
-    height: 600,
+    height: 500,
     padding: '10px',
     width: '100%',
     overflowY: 'scroll',

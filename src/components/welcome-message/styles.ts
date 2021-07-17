@@ -14,6 +14,17 @@ const styles = makeStyles({
   name: {
     fontWeight: 600,
   },
+
+  flexCenterDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+
+  image: {
+    width: '300px',
+    margin: '10px auto',
+    maxWidth: '90%',
+  },
 })
 
 export default styles

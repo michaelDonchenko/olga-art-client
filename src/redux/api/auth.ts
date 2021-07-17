@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { UserInfo } from '../reducers/authSlice'
 axios.defaults.withCredentials = true
 const server_url = process.env.REACT_APP_SERVER_URL
 
@@ -24,3 +25,6 @@ export const logoutUser = async () =>
 
 export const getUsers = async (page: number) =>
   await axios.get(`${server_url}/auth/users?page=${page}`)
+
+export const updateUserDetails = async (userInfo: UserInfo) =>
+  await axios.post(`${server_url}/auth/update-details`, { userInfo })

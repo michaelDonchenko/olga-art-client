@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
+  mainTitle: {
+    margin: '30px',
+  },
+
   mainContainer: {
     margin: '30px 0',
     width: '100%',

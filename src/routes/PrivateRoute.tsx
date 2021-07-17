@@ -18,11 +18,7 @@ const PrivateRoute: React.FC<RouteProps> = ({
     <Route
       {...rest}
       render={(props) =>
-        !user || user.role !== 'subscriber' ? (
-          <Redirect to='/login' />
-        ) : (
-          <Component {...props} />
-        )
+        !user ? <Redirect to='/login' /> : <Component {...props} />
       }
     />
   )

@@ -13,6 +13,7 @@ const styles = makeStyles({
     flexDirection: 'column',
     width: '100%',
     overflowX: 'auto',
+    padding: '12px',
   },
 
   mainHeader: {

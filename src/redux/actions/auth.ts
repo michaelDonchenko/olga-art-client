@@ -6,10 +6,11 @@ import {
   loginUser,
   logoutUser,
   getUsers,
+  updateUserDetails,
 } from '../api/auth'
 import { AxiosResponse } from 'axios'
 import Cookies from 'universal-cookie'
-import { UserI } from '../reducers/authSlice'
+import { UserI, UserInfo } from '../reducers/authSlice'
 
 const cookie = new Cookies()
 
@@ -86,6 +87,29 @@ export const users = createAsyncThunk(
 
     try {
       const response: AxiosResponse<usersResponse> = await getUsers(page)
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const updateDetails = createAsyncThunk(
+  'auth/updateDetails',
+  async (userInfo: UserInfo, { rejectWithValue }) => {
+    type updateDetailResponse = {
+      message: string
+      user: UserI
+    }
+
+    try {
+      const response: AxiosResponse<updateDetailResponse> =
+        await updateUserDetails(userInfo)
+
+      if (response) {
+        cookie.set('user', response.data.user)
+      }
 
       return response
     } catch (error) {

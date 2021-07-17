@@ -22,6 +22,9 @@ import UpdateProduct from './pages/admin/UpdateProduct'
 import UploadAboutDetails from './pages/admin/UploadAboutDetails'
 import UploadSiteRultes from './pages/admin/UploadSiteRules'
 import SingelProduct from './pages/single product/SingelProduct'
+import Checkout from './pages/checkout/Checkout'
+import OrderSuccess from './pages/order-success/OrderSuccess'
+import UserOrder from './pages/user/UserOrder'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -83,6 +86,17 @@ const App: React.FC = () => {
                 path='/user/dashboard'
                 exact
                 component={UserDashboard}
+              />
+              <PrivateRoute path='/checkout/:id' exact component={Checkout} />
+              <PrivateRoute
+                path='/order-success/:id'
+                exact
+                component={OrderSuccess}
+              />
+              <PrivateRoute
+                path='/user/order/:id'
+                exact
+                component={UserOrder}
               />
             </div>
           </Switch>

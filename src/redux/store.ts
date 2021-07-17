@@ -5,6 +5,7 @@ import cartSlice from './reducers/cartSlice'
 import categoriesSlice from './reducers/categoriesSlice'
 import messageSlice from './reducers/messageSlice'
 import modalSlice from './reducers/modalSlice'
+import orderSlice from './reducers/orderSlice'
 import productSlice from './reducers/productSlice'
 
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
     admin: adminSlice,
     message: messageSlice,
     modal: modalSlice,
+    order: orderSlice,
   },
 })
 

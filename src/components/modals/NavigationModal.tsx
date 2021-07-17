@@ -5,12 +5,12 @@ import { closeNavigationModal } from '../../redux/reducers/modalSlice'
 import CloseIcon from '@material-ui/icons/Close'
 import { NavLink } from 'react-router-dom'
 import styles from './styles'
-import HomeIcon from '@material-ui/icons/Home'
-import ShopIcon from '@material-ui/icons/Shop'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import { logout } from '../../redux/actions/auth'
+import { useHistory } from 'react-router'
 
 const NavigationModal = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const { navigationModal: modal } = useSelector(
     (state: RootState) => state.modal
@@ -23,10 +23,16 @@ const NavigationModal = () => {
   }
 
   const activeLinkStyles = {
-    backgroundColor: '#D3D3D3',
+    borderBottom: '2px solid',
   }
 
   const classes = styles()
+
+  const handleLogout = () => {
+    history.push('/')
+    dispatch(logout())
+    dispatch(closeNavigationModal())
+  }
 
   return (
     <Dialog open={modal} onClose={handleClose} fullScreen>
@@ -55,7 +61,7 @@ const NavigationModal = () => {
           className={classes.navigationLink}
           to='/'
         >
-          <HomeIcon className={classes.appIcon} /> Home
+          Home
         </NavLink>
         <NavLink
           onClick={handleClose}
@@ -64,7 +70,7 @@ const NavigationModal = () => {
           className={classes.navigationLink}
           to='/shop'
         >
-          <ShopIcon className={classes.appIcon} /> Shop
+          Shop
         </NavLink>
 
         <NavLink
@@ -76,14 +82,10 @@ const NavigationModal = () => {
         >
           {products?.length !== undefined ? (
             <Badge color='secondary' badgeContent={products.length}>
-              <ShoppingCartIcon className={classes.appIcon} />
               Cart
             </Badge>
           ) : (
-            <>
-              <ShoppingCartIcon className={classes.appIcon} />
-              Cart
-            </>
+            <>Cart</>
           )}
         </NavLink>
 
@@ -98,15 +100,21 @@ const NavigationModal = () => {
             Admin Dashboard
           </NavLink>
         ) : user && user.role === 'subscriber' ? (
-          <NavLink
-            onClick={handleClose}
-            exact
-            activeStyle={activeLinkStyles}
-            className={classes.navigationLink}
-            to='/user/dashboard'
-          >
-            User Dashboard
-          </NavLink>
+          <>
+            <NavLink
+              onClick={handleClose}
+              exact
+              activeStyle={activeLinkStyles}
+              className={classes.navigationLink}
+              to='/user/dashboard'
+            >
+              User Dashboard
+            </NavLink>
+
+            <span onClick={handleLogout} className={classes.navigationLink}>
+              Logout
+            </span>
+          </>
         ) : (
           <NavLink
             onClick={handleClose}

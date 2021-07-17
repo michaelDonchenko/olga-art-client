@@ -29,7 +29,7 @@ const styles = makeStyles({
     alignItems: 'center',
     display: 'flex',
     fontSize: '28px',
-    fontWeight: 500,
+    fontWeight: 700,
     textDecoration: 'none',
     margin: '15px 0',
     padding: '2px 10px',

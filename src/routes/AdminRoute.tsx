@@ -19,7 +19,7 @@ const AdminRoute: React.FC<RouteProps> = ({
       {...rest}
       render={(props) =>
         !user || user.role !== 'admin' ? (
-          <Redirect to='/error-page' />
+          <Redirect to='/login' />
         ) : (
           <Component {...props} />
         )

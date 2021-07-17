@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Cookies from 'universal-cookie'
-import { login, logout, register, users } from '../actions/auth'
+import { login, logout, register, updateDetails, users } from '../actions/auth'
 
 const cookies = new Cookies()
 
@@ -11,6 +11,18 @@ type User = {
   createdAt: string
 }
 
+export type UserInfo = {
+  email: string
+  name: string
+  phone: string
+  country: string
+  city: string
+  street: string
+  zipCode: string
+  homeNumber: string
+  apartment: string
+}
+
 export interface UserI {
   role: 'admin' | 'subscriber'
   verified: boolean
@@ -18,10 +30,11 @@ export interface UserI {
   email: string
   createdAt: string
   updatedAt: string
+  userInfo?: UserInfo
 }
 
 interface initialStateI {
-  user: null | UserI
+  user?: UserI
   loading: boolean
   successMessage: boolean | string
   errorMessage: boolean | string
@@ -31,7 +44,7 @@ interface initialStateI {
 }
 
 const initialState: initialStateI = {
-  user: cookies.get('user') ? cookies.get('user') : null,
+  user: cookies.get('user') ? cookies.get('user') : undefined,
   loading: false,
   successMessage: false,
   errorMessage: false,
@@ -49,6 +62,9 @@ const authSlice = createSlice({
     },
     setPage: (state, action) => {
       state.page = action.payload
+    },
+    successReset: (state) => {
+      state.successMessage = false
     },
   },
   extraReducers: (builder) => {
@@ -89,7 +105,7 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.loading = false
-        state.user = null
+        state.user = undefined
         state.errorMessage = false
       })
       .addCase(logout.rejected, (state, action: PayloadAction<any>) => {
@@ -114,8 +130,24 @@ const authSlice = createSlice({
           ? (state.errorMessage = action.payload.errors[0].msg)
           : (state.errorMessage = action.payload.message)
       })
+      //update details
+      .addCase(updateDetails.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(updateDetails.fulfilled, (state, action) => {
+        state.loading = false
+        state.successMessage = action.payload.data.message
+        state.user = action.payload.data.user
+        state.errorMessage = false
+      })
+      .addCase(updateDetails.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.errorMessage = action.payload.errors[0].msg)
+          : (state.errorMessage = action.payload.message)
+      })
   },
 })
 
-export const { resetError, setPage } = authSlice.actions
+export const { resetError, setPage, successReset } = authSlice.actions
 export default authSlice.reducer

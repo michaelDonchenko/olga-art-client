@@ -3,6 +3,7 @@ import { useHistory } from 'react-router'
 import styles from './styles'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
+import logo from '../../utils/logo.png'
 
 const WelcomeMessage: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth)
@@ -11,6 +12,10 @@ const WelcomeMessage: React.FC = () => {
 
   return (
     <div>
+      <div className={classes.flexCenterDiv}>
+        <img src={logo} alt='logo' className={classes.image} />
+      </div>
+
       {!user ? (
         <Typography className={classes.title} variant='h5' align='center'>
           Hello guest click
