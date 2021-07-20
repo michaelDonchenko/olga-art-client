@@ -25,6 +25,8 @@ import SingelProduct from './pages/single product/SingelProduct'
 import Checkout from './pages/checkout/Checkout'
 import OrderSuccess from './pages/order-success/OrderSuccess'
 import UserOrder from './pages/user/UserOrder'
+import AdminOrder from './pages/admin/AdminOrder'
+import ScrollToTop from './hooks/ScrollToTop'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -35,6 +37,7 @@ const App: React.FC = () => {
       <Router>
         <main className={classes.mainContainer}>
           <NavBar />
+          <ScrollToTop />
 
           <Switch>
             <div className={classes.container}>
@@ -79,6 +82,11 @@ const App: React.FC = () => {
                 path='/admin/upload-site-rules'
                 exact
                 component={UploadSiteRultes}
+              />
+              <AdminRoute
+                path='/admin/order/:id'
+                exact
+                component={AdminOrder}
               />
 
               {/* user pages */}

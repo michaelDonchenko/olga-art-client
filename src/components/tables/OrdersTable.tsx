@@ -15,10 +15,12 @@ import { orders as getOrders } from '../../redux/actions/order'
 import { setPage } from '../../redux/reducers/orderSlice'
 import moment from 'moment'
 import PaginationControll from '../pagination/PaginationControll'
+import { useHistory } from 'react-router'
 
 const OrdersTable = () => {
   const classes = styles()
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const { loading, orders, pages, page } = useSelector(
     (state: RootState) => state.order
@@ -64,8 +66,9 @@ const OrdersTable = () => {
                 <TableCell>{order.cartTotal} ₪</TableCell>
                 <TableCell>
                   <Button
+                    onClick={() => history.push(`/admin/order/${order._id}`)}
                     style={{ minWidth: '150px' }}
-                    variant='contained'
+                    variant='outlined'
                     color='primary'
                   >
                     View and Edit

@@ -22,6 +22,7 @@ const ProductsContainer = () => {
 
   useEffect(() => {
     dispatch(getProducts({ page, queryObj }))
+    window.scrollTo(0, 0)
   }, [page, queryObj])
 
   useEffect(() => {

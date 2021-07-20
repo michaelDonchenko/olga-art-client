@@ -60,9 +60,9 @@ export const logout = createAsyncThunk(
 
     try {
       const response: AxiosResponse<logoutResponse> = await logoutUser()
-      if (response) {
-        cookie.remove('user')
-      }
+
+      cookie.remove('user')
+
       return response
     } catch (error) {
       return rejectWithValue(error.response.data)

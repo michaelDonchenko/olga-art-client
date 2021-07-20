@@ -45,7 +45,28 @@ const Order = ({ order }: Props) => {
             />
           )}
         </Typography>
+
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ flexGrow: 1 }} className={classes.spanStyle}>
+            Order tacking number: <br></br>
+            {order?.trackNumber
+              ? order?.trackNumber
+              : 'You will recive order number when the order will be sent'}
+          </span>
+          <span className={classes.spanStyle}>
+            Order url link: <br></br>
+            {order?.url ? (
+              <a target='_blank' rel='noreferrer' href={order.url}>
+                Link
+              </a>
+            ) : (
+              'No link yet'
+            )}
+          </span>
+        </div>
       </div>
+
+      <hr></hr>
 
       <Grid container>
         <Grid item xs={12} md={6}>

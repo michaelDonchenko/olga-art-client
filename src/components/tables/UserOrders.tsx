@@ -71,7 +71,7 @@ const UserOrders = () => {
                   <Button
                     onClick={() => handleClick(order._id)}
                     style={{ minWidth: '150px' }}
-                    variant='contained'
+                    variant='outlined'
                     color='primary'
                   >
                     View Full details

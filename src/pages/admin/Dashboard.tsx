@@ -5,6 +5,7 @@ import AdminDetailsSection from '../../components/admin-details-section/AdminDet
 import UserMessages from '../../components/user-messages/UserMessages'
 import StyledHr from '../../components/styled-hr/StyledHr'
 import AdminMobileSidenav from '../../components/admin-sidenav/AdminMobileSidenav'
+import AdminGraph from '../../components/admin-graph/AdminGraph'
 
 const Dashboard = () => {
   const classes = styles()
@@ -18,6 +19,8 @@ const Dashboard = () => {
         <Hidden smUp>
           <AdminMobileSidenav />
         </Hidden>
+
+        <AdminGraph />
 
         <AdminDetailsSection />
         <StyledHr />

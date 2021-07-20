@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { create, order, orders, userOrders } from '../actions/order'
+import {
+  create,
+  order,
+  orders,
+  paypalPayment,
+  updateOrder,
+  userOrders,
+} from '../actions/order'
 import { UserInfo } from './authSlice'
 import { ProductFromDb } from './cartSlice'
 
@@ -50,6 +57,10 @@ const orderSlice = createSlice({
     },
     setPage: (state, action) => {
       state.page = action.payload
+    },
+    clearOrder: (state) => {
+      state.success = false
+      state.order = undefined
     },
   },
   extraReducers: (builder) => {
@@ -117,9 +128,40 @@ const orderSlice = createSlice({
           ? (state.error = action.payload.errors[0].msg)
           : (state.error = action.payload.message)
       })
+      // update paypal payment
+      .addCase(paypalPayment.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(paypalPayment.fulfilled, (state, action) => {
+        state.loading = false
+        state.order = action.payload.data.order
+        state.error = false
+      })
+      .addCase(paypalPayment.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.error = action.payload.errors[0].msg)
+          : (state.error = action.payload.message)
+      })
+      // update order status
+      .addCase(updateOrder.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(updateOrder.fulfilled, (state, action) => {
+        state.loading = false
+        state.order = action.payload.data.order
+        state.success = action.payload.data.message
+        state.error = false
+      })
+      .addCase(updateOrder.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.error = action.payload.errors[0].msg)
+          : (state.error = action.payload.message)
+      })
   },
 })
 
-export const { clearState, setPage } = orderSlice.actions
+export const { clearState, setPage, clearOrder } = orderSlice.actions
 
 export default orderSlice.reducer

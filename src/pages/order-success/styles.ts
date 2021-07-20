@@ -2,8 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 const styles = makeStyles({
   mainContainer: {
-    margin: '30px 0',
-    width: '100%',
+    margin: '30px auto',
   },
 
   mainHeader: {
@@ -21,10 +20,16 @@ const styles = makeStyles({
   },
 
   gridContainer: {
-    margin: '5rem 0',
+    margin: '3rem auto',
+    padding: '10px',
+    maxWidth: '95%',
   },
 
   subTitle: {
+    padding: '10px',
+  },
+
+  spanStyle: {
     padding: '10px',
   },
 })

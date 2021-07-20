@@ -34,6 +34,10 @@ const Checkout = () => {
     dispatch(clearSuccess())
   }
 
+  if (authSuccessMessage) {
+    window.scrollTo(0, 0)
+  }
+
   return (
     <div className={classes.mainContainer}>
       <Typography className={classes.mainTitle} align='center' variant='h4'>
