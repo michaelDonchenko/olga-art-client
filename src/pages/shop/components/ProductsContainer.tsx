@@ -6,7 +6,7 @@ import Loader from '../../../components/loader'
 import { useEffect } from 'react'
 import { products as getProducts } from '../../../redux/actions/product'
 import PaginationControll from '../../../components/pagination/PaginationControll'
-import { resetQueryObj, setPage } from '../../../redux/reducers/productSlice'
+import { setPage } from '../../../redux/reducers/productSlice'
 
 const ProductsContainer = () => {
   const classes = styles()
@@ -16,19 +16,10 @@ const ProductsContainer = () => {
     (state: RootState) => state.product
   )
 
-  const handleStateReset = () => {
-    dispatch(setPage(1))
-    dispatch(resetQueryObj())
-  }
-
   useEffect(() => {
     dispatch(getProducts({ page, queryObj }))
     window.scrollTo(0, 0)
   }, [page, queryObj])
-
-  useEffect(() => {
-    return () => handleStateReset()
-  }, [])
 
   return (
     <>

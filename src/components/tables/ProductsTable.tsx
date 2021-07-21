@@ -18,7 +18,6 @@ import { useHistory } from 'react-router'
 import Loader from '../loader'
 import {
   Product,
-  resetQueryObj,
   resetSuccessMessage,
   setPage,
   setProductToUpdate,
@@ -37,15 +36,6 @@ const ProductsTable = () => {
   useEffect(() => {
     dispatch(getAdminProducts(page))
   }, [page])
-
-  const handleStateReset = () => {
-    dispatch(setPage(1))
-    dispatch(resetQueryObj())
-  }
-
-  useEffect(() => {
-    return () => handleStateReset()
-  }, [])
 
   const handleUpdateDetailsClick = (product: Product) => {
     dispatch(setProductToUpdate(product))
