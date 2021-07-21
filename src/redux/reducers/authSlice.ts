@@ -1,6 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Cookies from 'universal-cookie'
-import { login, logout, register, updateDetails, users } from '../actions/auth'
+import {
+  forgotPassowrd,
+  login,
+  logout,
+  passwordAction,
+  passwordValidation,
+  register,
+  updateDetails,
+  users,
+} from '../actions/auth'
 
 const cookies = new Cookies()
 
@@ -41,6 +50,10 @@ interface initialStateI {
   page: number
   pages: number
   users: null | User[]
+  passwordValidatorError: boolean | string
+  passwordValidatorSuccess: boolean | string
+  resetPasswordError: boolean | string
+  resetPasswordSuccess: boolean | string
 }
 
 const initialState: initialStateI = {
@@ -51,6 +64,10 @@ const initialState: initialStateI = {
   page: 1,
   pages: 0,
   users: null,
+  passwordValidatorError: false,
+  passwordValidatorSuccess: false,
+  resetPasswordError: false,
+  resetPasswordSuccess: false,
 }
 
 const authSlice = createSlice({
@@ -145,6 +162,54 @@ const authSlice = createSlice({
         action.payload.errors
           ? (state.errorMessage = action.payload.errors[0].msg)
           : (state.errorMessage = action.payload.message)
+      })
+      //update details
+      .addCase(forgotPassowrd.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(forgotPassowrd.fulfilled, (state, action) => {
+        state.loading = false
+        state.successMessage = action.payload.data.message
+        state.errorMessage = false
+      })
+      .addCase(forgotPassowrd.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.errorMessage = action.payload.errors[0].msg)
+          : (state.errorMessage = action.payload.message)
+      })
+      //reset password validation
+      .addCase(passwordValidation.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(passwordValidation.fulfilled, (state, action) => {
+        state.loading = false
+        state.passwordValidatorSuccess = action.payload.data.message
+        state.passwordValidatorError = false
+      })
+      .addCase(
+        passwordValidation.rejected,
+        (state, action: PayloadAction<any>) => {
+          state.loading = false
+          action.payload.errors
+            ? (state.passwordValidatorError = action.payload.errors[0].msg)
+            : (state.passwordValidatorError = action.payload.message)
+        }
+      )
+      //reset password action
+      .addCase(passwordAction.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(passwordAction.fulfilled, (state, action) => {
+        state.loading = false
+        state.resetPasswordSuccess = action.payload.data.message
+        state.resetPasswordError = false
+      })
+      .addCase(passwordAction.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.resetPasswordError = action.payload.errors[0].msg)
+          : (state.resetPasswordError = action.payload.message)
       })
   },
 })

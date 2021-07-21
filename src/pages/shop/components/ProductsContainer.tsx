@@ -11,6 +11,7 @@ import { resetQueryObj, setPage } from '../../../redux/reducers/productSlice'
 const ProductsContainer = () => {
   const classes = styles()
   const dispatch = useDispatch()
+
   const { products, pages, page, loading, queryObj } = useSelector(
     (state: RootState) => state.product
   )

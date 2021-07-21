@@ -7,6 +7,10 @@ import {
   logoutUser,
   getUsers,
   updateUserDetails,
+  forgotPasswordEmail,
+  resetPasswordValidation,
+  passwordResetObj,
+  resetPasswordAction,
 } from '../api/auth'
 import { AxiosResponse } from 'axios'
 import Cookies from 'universal-cookie'
@@ -24,9 +28,8 @@ export const login = createAsyncThunk(
 
     try {
       const response: AxiosResponse<loginResponse> = await loginUser(obj)
-      if (response) {
-        cookie.set('user', response.data.user)
-      }
+
+      cookie.set('user', response.data.user)
 
       return response
     } catch (error) {
@@ -110,6 +113,60 @@ export const updateDetails = createAsyncThunk(
       if (response) {
         cookie.set('user', response.data.user)
       }
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const forgotPassowrd = createAsyncThunk(
+  'auth/forgotPassowrd',
+  async (email: string, { rejectWithValue }) => {
+    type forgotPassowrdResponse = {
+      message: string
+    }
+
+    try {
+      const response: AxiosResponse<forgotPassowrdResponse> =
+        await forgotPasswordEmail(email)
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const passwordValidation = createAsyncThunk(
+  'auth/passwordValidation',
+  async (id: string, { rejectWithValue }) => {
+    type passwordValidationResponse = {
+      message: string
+    }
+
+    try {
+      const response: AxiosResponse<passwordValidationResponse> =
+        await resetPasswordValidation(id)
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const passwordAction = createAsyncThunk(
+  'auth/passwordAction',
+  async (obj: passwordResetObj, { rejectWithValue }) => {
+    type passwordActionResponse = {
+      message: string
+    }
+
+    try {
+      const response: AxiosResponse<passwordActionResponse> =
+        await resetPasswordAction(obj)
 
       return response
     } catch (error) {

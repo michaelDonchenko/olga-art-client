@@ -102,8 +102,13 @@ const Login = () => {
         </p>
         <p className={classes.text}>
           Forgot password? click
-          <span className={classes.linkSpan}>here</span>to get password reset
-          link
+          <span
+            onClick={() => history.push('/forgot-password')}
+            className={classes.linkSpan}
+          >
+            here
+          </span>
+          to get password reset link
         </p>
       </div>
     </Paper>

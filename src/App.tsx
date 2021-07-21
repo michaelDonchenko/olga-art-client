@@ -27,6 +27,8 @@ import OrderSuccess from './pages/order-success/OrderSuccess'
 import UserOrder from './pages/user/UserOrder'
 import AdminOrder from './pages/admin/AdminOrder'
 import ScrollToTop from './hooks/ScrollToTop'
+import ForgotPassword from './pages/forgot-password/ForgotPassword'
+import ResetPassword from './pages/forgot-password/ResetPassword'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -46,7 +48,13 @@ const App: React.FC = () => {
               <Route path='/cart' exact component={Cart} />
               <Route path='/login' exact component={Login} />
               <Route path='/register' exact component={Register} />
+              <Route path='/forgot-password' exact component={ForgotPassword} />
               <Route path='/product/:id' exact component={SingelProduct} />
+              <Route
+                path='/password-reset/:id'
+                exact
+                component={ResetPassword}
+              />
 
               {/* admin pages */}
               <AdminRoute path='/admin/dashboard' exact component={Dashboard} />
