@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/styles/globalStyles.css"],"names":[],"mappings":"AAEA,KACE,YACF,CAEA,EACE,mCACF","file":"main.5ea1ac00.chunk.css","sourcesContent":["@import '~react-image-gallery/styles/css/image-gallery.css';\r\n\r\nbody {\r\n  height: 100vh;\r\n}\r\n\r\n* {\r\n  font-family: 'Montserrat', sans-serif;\r\n}\r\n"]}
