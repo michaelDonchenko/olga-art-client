@@ -10,6 +10,7 @@ import { RootState } from '../../redux/store'
 import ShowSuccess from '../../hooks/ShowSuccess'
 import ShowError from '../../hooks/ShowError'
 import { resetError } from '../../redux/reducers/authSlice'
+import Seo from '../../hooks/Seo'
 
 const Register = () => {
   const classes = styles()
@@ -48,66 +49,70 @@ const Register = () => {
   }, [])
 
   return (
-    <Paper className={classes.mainContainer}>
-      <h1 className={classes.title}>Register Page</h1>
+    <>
+      <Seo title='Register page' name='Register' />
 
-      <form className={classes.formContainer} onSubmit={handleSubmit}>
-        <TextField
-          className={classes.formElement}
-          label='Email'
-          name='email'
-          type='email'
-          required={true}
-          value={email}
-          onChange={(e) => HandleChange(e, values, setValues)}
-        />
-        <TextField
-          className={classes.formElement}
-          label='Password'
-          name='password'
-          type='password'
-          required={true}
-          value={password}
-          onChange={(e) => HandleChange(e, values, setValues)}
-        />
+      <Paper className={classes.mainContainer}>
+        <h1 className={classes.title}>Register Page</h1>
 
-        <TextField
-          className={classes.formElement}
-          label='Confirm password'
-          name='confirmPassword'
-          type='password'
-          required={true}
-          value={confirmPassword}
-          onChange={(e) => HandleChange(e, values, setValues)}
-        />
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+          <TextField
+            className={classes.formElement}
+            label='Email'
+            name='email'
+            type='email'
+            required={true}
+            value={email}
+            onChange={(e) => HandleChange(e, values, setValues)}
+          />
+          <TextField
+            className={classes.formElement}
+            label='Password'
+            name='password'
+            type='password'
+            required={true}
+            value={password}
+            onChange={(e) => HandleChange(e, values, setValues)}
+          />
 
-        <Button
-          className={classes.formElement}
-          variant='contained'
-          color='primary'
-          type='submit'
-          disabled={loading}
-        >
-          {loading ? 'Loading...' : 'Register'}
-        </Button>
-      </form>
+          <TextField
+            className={classes.formElement}
+            label='Confirm password'
+            name='confirmPassword'
+            type='password'
+            required={true}
+            value={confirmPassword}
+            onChange={(e) => HandleChange(e, values, setValues)}
+          />
 
-      {successMessage && ShowSuccess(successMessage)}
-      {errorMessage && ShowError(errorMessage)}
-
-      <div className={classes.footerDiv}>
-        <p className={classes.text}>
-          Already have a user? click
-          <span
-            onClick={() => history.push('/login')}
-            className={classes.linkSpan}
+          <Button
+            className={classes.formElement}
+            variant='contained'
+            color='primary'
+            type='submit'
+            disabled={loading}
           >
-            here
-          </span>
-          to Login
-        </p>
-      </div>
-    </Paper>
+            {loading ? 'Loading...' : 'Register'}
+          </Button>
+        </form>
+
+        {successMessage && ShowSuccess(successMessage)}
+        {errorMessage && ShowError(errorMessage)}
+
+        <div className={classes.footerDiv}>
+          <p className={classes.text}>
+            Already have a user? click
+            <span
+              onClick={() => history.push('/login')}
+              className={classes.linkSpan}
+            >
+              here
+            </span>
+            to Login
+          </p>
+        </div>
+      </Paper>
+    </>
   )
 }
 

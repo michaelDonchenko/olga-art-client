@@ -76,7 +76,7 @@ const messageSlice = createSlice({
       .addCase(messages.rejected, (state, action: PayloadAction<any>) => {
         if (action.payload === 'Unauthorized') {
           state.loading = false
-          state.errorMessage = 'You are Unauthorized'
+          state.errorMessage = action.payload
         } else {
           state.loading = false
           action.payload.errors

@@ -16,7 +16,7 @@ const styles = makeStyles({
   },
 
   mainHeader: {
-    margin: '15px 0',
+    margin: '10px 0',
   },
 })
 

@@ -11,6 +11,7 @@ import ShowError from '../../hooks/ShowError'
 import { resetError, successReset } from '../../redux/reducers/authSlice'
 import { passwordAction, passwordValidation } from '../../redux/actions/auth'
 import Loader from '../../components/loader'
+import Seo from '../../hooks/Seo'
 
 type Params = {
   id: string
@@ -67,6 +68,8 @@ const ResetPassword = () => {
 
   return (
     <Paper className={classes.mainContainer}>
+      <Seo title='Reset password' name='reset-password' />
+
       {loading && <Loader />}
       {!loading && passwordValidatorError ? (
         <p style={{ color: 'red', padding: '10px' }}>

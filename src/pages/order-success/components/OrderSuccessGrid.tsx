@@ -48,16 +48,12 @@ const OrderSuccessGrid = ({ order, sdk }: Props) => {
                 <p
                   style={{
                     color: 'green',
-                    padding: '10px',
-                    fontSize: '18px',
-                    fontWeight: 600,
+                    padding: '15px',
+                    fontSize: '20px',
+                    fontWeight: 700,
                   }}
                 >
                   Thank you your order is paid succefully.
-                </p>
-                <p>
-                  Updates about your order status and tracking number will sent
-                  to your email at {order.userInfo.email}
                 </p>
               </>
             )}

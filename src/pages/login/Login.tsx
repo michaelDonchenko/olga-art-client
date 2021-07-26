@@ -10,6 +10,7 @@ import ShowError from '../../hooks/ShowError'
 import { RootState } from '../../redux/store'
 import { useEffect } from 'react'
 import { resetError } from '../../redux/reducers/authSlice'
+import Seo from '../../hooks/Seo'
 
 type Values = {
   email: string
@@ -53,65 +54,68 @@ const Login = () => {
   }, [])
 
   return (
-    <Paper className={classes.mainContainer}>
-      <h1 className={classes.title}>Login Page</h1>
+    <>
+      <Seo title='Login page' name='Login' />
+      <Paper className={classes.mainContainer}>
+        <h1 className={classes.title}>Login Page</h1>
 
-      <form className={classes.formContainer} onSubmit={handleSubmit}>
-        <TextField
-          className={classes.formElement}
-          label='Email'
-          name='email'
-          type='email'
-          required={true}
-          value={email}
-          onChange={(e) => HandleChange(e, values, setValues)}
-        />
-        <TextField
-          className={classes.formElement}
-          label='Password'
-          name='password'
-          type='password'
-          required={true}
-          value={password}
-          onChange={(e) => HandleChange(e, values, setValues)}
-        />
+        <form className={classes.formContainer} onSubmit={handleSubmit}>
+          <TextField
+            className={classes.formElement}
+            label='Email'
+            name='email'
+            type='email'
+            required={true}
+            value={email}
+            onChange={(e) => HandleChange(e, values, setValues)}
+          />
+          <TextField
+            className={classes.formElement}
+            label='Password'
+            name='password'
+            type='password'
+            required={true}
+            value={password}
+            onChange={(e) => HandleChange(e, values, setValues)}
+          />
 
-        <Button
-          className={classes.formElement}
-          variant='contained'
-          color='primary'
-          type='submit'
-          disabled={loading}
-        >
-          {loading ? 'Loading...' : 'Login'}
-        </Button>
-      </form>
-
-      {errorMessage && ShowError(errorMessage)}
-
-      <div className={classes.footerDiv}>
-        <p className={classes.text}>
-          Don't have an account? click
-          <span
-            onClick={() => history.push('/register')}
-            className={classes.linkSpan}
+          <Button
+            className={classes.formElement}
+            variant='contained'
+            color='primary'
+            type='submit'
+            disabled={loading}
           >
-            here
-          </span>
-          to register
-        </p>
-        <p className={classes.text}>
-          Forgot password? click
-          <span
-            onClick={() => history.push('/forgot-password')}
-            className={classes.linkSpan}
-          >
-            here
-          </span>
-          to get password reset link
-        </p>
-      </div>
-    </Paper>
+            {loading ? 'Loading...' : 'Login'}
+          </Button>
+        </form>
+
+        {errorMessage && ShowError(errorMessage)}
+
+        <div className={classes.footerDiv}>
+          <p className={classes.text}>
+            Don't have an account? click
+            <span
+              onClick={() => history.push('/register')}
+              className={classes.linkSpan}
+            >
+              here
+            </span>
+            to register
+          </p>
+          <p className={classes.text}>
+            Forgot password? click
+            <span
+              onClick={() => history.push('/forgot-password')}
+              className={classes.linkSpan}
+            >
+              here
+            </span>
+            to get password reset link
+          </p>
+        </div>
+      </Paper>
+    </>
   )
 }
 

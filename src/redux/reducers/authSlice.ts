@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Cookies from 'universal-cookie'
 import {
   forgotPassowrd,
   login,
@@ -10,8 +9,6 @@ import {
   updateDetails,
   users,
 } from '../actions/auth'
-
-const cookies = new Cookies()
 
 type User = {
   email: string
@@ -57,7 +54,9 @@ interface initialStateI {
 }
 
 const initialState: initialStateI = {
-  user: cookies.get('user') ? cookies.get('user') : undefined,
+  user: window.localStorage.getItem('user')
+    ? JSON.parse(window.localStorage.getItem('user') as string)
+    : undefined,
   loading: false,
   successMessage: false,
   errorMessage: false,

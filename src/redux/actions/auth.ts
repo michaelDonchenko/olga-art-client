@@ -13,10 +13,7 @@ import {
   resetPasswordAction,
 } from '../api/auth'
 import { AxiosResponse } from 'axios'
-import Cookies from 'universal-cookie'
 import { UserI, UserInfo } from '../reducers/authSlice'
-
-const cookie = new Cookies()
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -29,7 +26,8 @@ export const login = createAsyncThunk(
     try {
       const response: AxiosResponse<loginResponse> = await loginUser(obj)
 
-      cookie.set('user', response.data.user)
+      // cookie.set('user', response.data.user)
+      window.localStorage.setItem('user', JSON.stringify(response.data.user))
 
       return response
     } catch (error) {
@@ -64,7 +62,7 @@ export const logout = createAsyncThunk(
     try {
       const response: AxiosResponse<logoutResponse> = await logoutUser()
 
-      cookie.remove('user')
+      window.localStorage.removeItem('user')
 
       return response
     } catch (error) {
@@ -110,9 +108,7 @@ export const updateDetails = createAsyncThunk(
       const response: AxiosResponse<updateDetailResponse> =
         await updateUserDetails(userInfo)
 
-      if (response) {
-        cookie.set('user', response.data.user)
-      }
+      window.localStorage.setItem('user', JSON.stringify(response.data.user))
 
       return response
     } catch (error) {

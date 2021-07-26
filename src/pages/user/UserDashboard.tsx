@@ -3,11 +3,14 @@ import UserSidenav from '../../components/user-sidenav/UserSidenav'
 import { Hidden } from '@material-ui/core'
 import UserOrders from '../../components/tables/UserOrders'
 import { Typography } from '@material-ui/core'
+import Seo from '../../hooks/Seo'
 
 const UserDashboard = () => {
   const classes = styles()
   return (
     <div className={classes.mainContainer}>
+      <Seo title='User Dashboard' name='user-dashboard' />
+
       <Hidden xsDown>
         <UserSidenav />
       </Hidden>

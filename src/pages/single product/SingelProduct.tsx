@@ -9,6 +9,7 @@ import Loader from '../../components/loader'
 import ProductInfoSection from './components/ProductInfoSection'
 import ImageGallery from 'react-image-gallery'
 import { Product } from '../../redux/reducers/productSlice'
+import Seo from '../../hooks/Seo'
 
 const SingelProduct = () => {
   type Params = {
@@ -29,6 +30,8 @@ const SingelProduct = () => {
 
   return (
     <div className={classes.container}>
+      <Seo title='Product page' name='Product' />
+
       {loading ? (
         <Loader />
       ) : (

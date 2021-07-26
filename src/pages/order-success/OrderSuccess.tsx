@@ -8,6 +8,8 @@ import OrderSuccessGrid from './components/OrderSuccessGrid'
 import { order as getOrder } from '../../redux/actions/order'
 import { RootState } from '../../redux/store'
 import Order from './components/Order'
+import Seo from '../../hooks/Seo'
+import { getPaypalClientId } from '../../redux/api/auth'
 
 const OrderSuccess = () => {
   type Params = {
@@ -42,11 +44,12 @@ const OrderSuccess = () => {
 
   const addPaypalScript = async () => {
     try {
-      // const { data: clientId } = await getPaypalClientId(user.token)
+      const { data: clientId } = await getPaypalClientId()
+
       const script = document.createElement('script')
 
       script.type = 'text/javascript'
-      script.src = `https://www.paypal.com/sdk/js?client-id=AVZshg85dcH_q42PUKuBwCNMVlrZ695CFMluaolGq5OLhnj1VbZauhIvJGpOkZJu7nqpeMgyjhn15puV&currency=ILS`
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=ILS`
       script.async = true
       script.onload = () => {
         setSdk(true)
@@ -59,6 +62,8 @@ const OrderSuccess = () => {
 
   return (
     <div className={classes.mainContainer}>
+      <Seo title='Order success' name='order-success' />
+
       <Header />
       <OrderSuccessGrid order={order} sdk={sdk} />
 

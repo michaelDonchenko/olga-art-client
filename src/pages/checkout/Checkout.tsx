@@ -10,6 +10,7 @@ import ShowError from '../../hooks/ShowError'
 import Loader from '../../components/loader'
 import DetailsSaveSuccess from './components/DetailsSaveSuccess'
 import { clearSuccess } from '../../redux/reducers/cartSlice'
+import Seo from '../../hooks/Seo'
 
 type Params = {
   id: string
@@ -40,6 +41,8 @@ const Checkout = () => {
 
   return (
     <div className={classes.mainContainer}>
+      <Seo title='Checkout page' name='Checkout' />
+
       <Typography className={classes.mainTitle} align='center' variant='h4'>
         Checkout Page
       </Typography>

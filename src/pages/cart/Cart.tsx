@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import DeliveryOptions from './components/DeliveryOptions'
 import PaymentOptions from './components/PaymentOptions'
 import CartSummary from './components/CartSummary'
+import Seo from '../../hooks/Seo'
 
 const Cart = () => {
   const classes = styles()
@@ -15,6 +16,8 @@ const Cart = () => {
 
   return (
     <div className={classes.mainContainer}>
+      <Seo title='Cart page' name='Cart' />
+
       <Typography align='center' className={classes.mainTitle} variant='h4'>
         Your Cart <ShoppingCartIcon className={classes.titleIcon} />
       </Typography>

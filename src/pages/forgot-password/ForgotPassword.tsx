@@ -10,6 +10,7 @@ import { RootState } from '../../redux/store'
 import ShowSuccess from '../../hooks/ShowSuccess'
 import ShowError from '../../hooks/ShowError'
 import { resetError, successReset } from '../../redux/reducers/authSlice'
+import Seo from '../../hooks/Seo'
 
 const ForgotPassword = () => {
   const classes = styles()
@@ -48,6 +49,8 @@ const ForgotPassword = () => {
 
   return (
     <Paper className={classes.mainContainer}>
+      <Seo title='Forgot Password' name='forgot-password' />
+
       <h1 className={classes.title}>Forgot password?</h1>
       <p className={classes.text}>
         In order to reset your password type your email and we will send you

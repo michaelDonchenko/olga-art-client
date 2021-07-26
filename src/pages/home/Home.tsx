@@ -13,6 +13,7 @@ import {
 } from '../../redux/reducers/adminSlice'
 import { useEffect } from 'react'
 import SiteRulesModal from '../../components/modals/SiteRulesModal'
+import Seo from '../../hooks/Seo'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Home = () => {
 
   return (
     <div>
+      <Seo title='Home page' name='Home' />
       <WelcomeMessage />
       <StyledHr />
       <Banner />
