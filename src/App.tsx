@@ -29,6 +29,7 @@ import AdminOrder from './pages/admin/AdminOrder'
 import ScrollToTop from './hooks/ScrollToTop'
 import ForgotPassword from './pages/forgot-password/ForgotPassword'
 import ResetPassword from './pages/forgot-password/ResetPassword'
+import Verification from './pages/verification-page/Verification'
 
 const App: React.FC = () => {
   const classes = styles()
@@ -48,6 +49,11 @@ const App: React.FC = () => {
               <Route path='/cart' exact component={Cart} />
               <Route path='/login' exact component={Login} />
               <Route path='/register' exact component={Register} />
+              <Route
+                path='/verify-account/:verificationCode'
+                exact
+                component={Verification}
+              />
               <Route path='/forgot-password' exact component={ForgotPassword} />
               <Route path='/product/:id' exact component={SingelProduct} />
               <Route

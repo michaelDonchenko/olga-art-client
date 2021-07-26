@@ -46,3 +46,6 @@ export const resetPasswordAction = async (obj: passwordResetObj) =>
 
 export const getPaypalClientId = async () =>
   await axios.get(`${server_url}/auth/get-paypal-client-id`)
+
+export const verifyAccount = async (verificationCode: string) =>
+  await axios.post(`${server_url}/auth/verify-account`, { verificationCode })

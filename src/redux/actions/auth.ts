@@ -11,6 +11,7 @@ import {
   resetPasswordValidation,
   passwordResetObj,
   resetPasswordAction,
+  verifyAccount,
 } from '../api/auth'
 import { AxiosResponse } from 'axios'
 import { UserI, UserInfo } from '../reducers/authSlice'
@@ -163,6 +164,25 @@ export const passwordAction = createAsyncThunk(
     try {
       const response: AxiosResponse<passwordActionResponse> =
         await resetPasswordAction(obj)
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+)
+
+export const verify = createAsyncThunk(
+  'auth/verify',
+  async (verificationCode: string, { rejectWithValue }) => {
+    type verificationResponse = {
+      message: string
+    }
+
+    try {
+      const response: AxiosResponse<verificationResponse> = await verifyAccount(
+        verificationCode
+      )
 
       return response
     } catch (error) {

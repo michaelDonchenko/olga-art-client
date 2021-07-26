@@ -8,6 +8,7 @@ import {
   register,
   updateDetails,
   users,
+  verify,
 } from '../actions/auth'
 
 type User = {
@@ -51,6 +52,8 @@ interface initialStateI {
   passwordValidatorSuccess: boolean | string
   resetPasswordError: boolean | string
   resetPasswordSuccess: boolean | string
+  verificationError: boolean | string
+  verificationSuccess: boolean | string
 }
 
 const initialState: initialStateI = {
@@ -67,6 +70,8 @@ const initialState: initialStateI = {
   passwordValidatorSuccess: false,
   resetPasswordError: false,
   resetPasswordSuccess: false,
+  verificationError: false,
+  verificationSuccess: false,
 }
 
 const authSlice = createSlice({
@@ -209,6 +214,21 @@ const authSlice = createSlice({
         action.payload.errors
           ? (state.resetPasswordError = action.payload.errors[0].msg)
           : (state.resetPasswordError = action.payload.message)
+      })
+      //verify account
+      .addCase(verify.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(verify.fulfilled, (state, action) => {
+        state.loading = false
+        state.verificationSuccess = action.payload.data.message
+        state.verificationError = false
+      })
+      .addCase(verify.rejected, (state, action: PayloadAction<any>) => {
+        state.loading = false
+        action.payload.errors
+          ? (state.verificationError = action.payload.errors[0].msg)
+          : (state.verificationError = action.payload.message)
       })
   },
 })
