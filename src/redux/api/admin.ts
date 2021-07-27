@@ -25,3 +25,6 @@ export const getSiteRules = async () =>
 
 export const updateSiteRules = async (text: string) =>
   await axios.post(`${server_url}/admin/update-site-rules`, { text })
+
+export const getTinyApiKey = async () =>
+  await axios.get(`${server_url}/admin/tiny-api-key`)

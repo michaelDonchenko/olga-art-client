@@ -14,11 +14,13 @@ import {
   resetSuccessMessage,
 } from '../../redux/reducers/adminSlice'
 import ShowError from '../../hooks/ShowError'
+import { getTinyApiKey } from '../../redux/api/admin'
 
 const UpdateSiteRulesEditor = () => {
   const classes = styles()
   const history = useHistory()
   const [text, setText] = useState('')
+  const [tinyApi, setTinyApi] = useState('')
   const dispatch = useDispatch()
 
   const { loading, siteRules, errorMessage, successMessage } = useSelector(
@@ -39,32 +41,40 @@ const UpdateSiteRulesEditor = () => {
     dispatch(resetErrorMessage())
   }
 
+  const handleTinyApiKey = async () => {
+    const { data } = await getTinyApiKey()
+    setTinyApi(data.tinyApiKey)
+  }
+
   useEffect(() => {
+    handleTinyApiKey()
     return () => handleResetMessages()
   }, [])
 
   return (
     <div className={classes.main}>
       <div className={classes.container}>
-        <Editor
-          apiKey='2q2bdjlqnx7i6d0lbkldb695k5mgi3j1j7wfsx4y5prpnd4s'
-          value={text}
-          init={{
-            height: 500,
-            menubar: false,
-            plugins: [
-              'advlist autolink lists link image charmap print preview anchor',
-              'searchreplace visualblocks code fullscreen',
-              'insertdatetime media table paste code help wordcount',
-            ],
-            toolbar:
-              'undo redo | formatselect | bold italic backcolor | \
-             alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help',
-          }}
-          onEditorChange={(value) => setText(value)}
-          onInit={() => dispatch(getSiteRules())}
-        />
+        {tinyApi && (
+          <Editor
+            apiKey={tinyApi}
+            value={text}
+            init={{
+              height: 500,
+              menubar: false,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount',
+              ],
+              toolbar:
+                'undo redo | formatselect | bold italic backcolor | \
+    alignleft aligncenter alignright alignjustify | \
+    bullist numlist outdent indent | removeformat | help',
+            }}
+            onEditorChange={(value) => setText(value)}
+            onInit={() => dispatch(getSiteRules())}
+          />
+        )}
 
         {errorMessage && ShowError(errorMessage)}
 
