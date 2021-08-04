@@ -146,10 +146,15 @@ const authSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(users.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //update details
       .addCase(updateDetails.pending, (state, action) => {
@@ -162,12 +167,17 @@ const authSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(updateDetails.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
-      //update details
+      //forgot password
       .addCase(forgotPassowrd.pending, (state, action) => {
         state.loading = true
       })

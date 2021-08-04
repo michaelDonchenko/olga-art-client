@@ -51,7 +51,6 @@ const UploadProductImagesForm = () => {
       )
     }
 
-    let array: string[] = []
     if (files?.length) {
       for (let i = 0; i < files.length; i++) {
         Resizer.imageFileResizer(
@@ -62,11 +61,7 @@ const UploadProductImagesForm = () => {
           100,
           0,
           (uri: any) => {
-            array.push(uri)
-
-            if (array.length === files.length) {
-              dispatch(productImageUpload({ id, array }))
-            }
+            dispatch(productImageUpload({ id, image: uri }))
           },
           'base64'
         )

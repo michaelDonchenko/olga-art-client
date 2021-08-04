@@ -36,6 +36,9 @@ const categorySlice = createSlice({
     resetSuccessMessage: (state) => {
       state.successMessage = false
     },
+    resetErrorMessage: (state) => {
+      state.errorMessage = false
+    },
     placeCategoryToUpdate: (state, action) => {
       state.categoryToUpdate = action.payload
     },
@@ -52,10 +55,15 @@ const categorySlice = createSlice({
         state.errorMessage = false
       })
       .addCase(create.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get categories
       .addCase(categories.pending, (state, action) => {
@@ -72,7 +80,7 @@ const categorySlice = createSlice({
           ? (state.errorMessage = action.payload.errors[0].msg)
           : (state.errorMessage = action.payload.message)
       })
-      //get categories
+      //remove categories
       .addCase(removeCategory.pending, (state, action) => {
         state.loading = true
       })
@@ -82,12 +90,17 @@ const categorySlice = createSlice({
         state.errorMessage = false
       })
       .addCase(removeCategory.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
-      //get categories
+      //update category
       .addCase(putCategory.pending, (state, action) => {
         state.loading = true
       })
@@ -97,15 +110,20 @@ const categorySlice = createSlice({
         state.errorMessage = false
       })
       .addCase(putCategory.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
   },
 })
 
-export const { resetSuccessMessage, placeCategoryToUpdate } =
+export const { resetSuccessMessage, placeCategoryToUpdate, resetErrorMessage } =
   categorySlice.actions
 
 export default categorySlice.reducer

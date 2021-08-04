@@ -30,13 +30,37 @@ import ScrollToTop from './hooks/ScrollToTop'
 import ForgotPassword from './pages/forgot-password/ForgotPassword'
 import ResetPassword from './pages/forgot-password/ResetPassword'
 import Verification from './pages/verification-page/Verification'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from './redux/store'
+import { openErrorModal } from './redux/reducers/modalSlice'
+import ErrorModal from './components/modals/ErrorModal'
 
 const App: React.FC = () => {
   const classes = styles()
+  const dispatch = useDispatch()
+  const { auth, category, product, cart, order, message, admin } = useSelector(
+    (state: RootState) => state
+  )
+
+  if (
+    (auth.errorMessage ||
+      category.errorMessage ||
+      product.errorMessage ||
+      cart.errorMessage ||
+      order.error ||
+      message.errorMessage ||
+      admin.errorMessage ||
+      product.addToWishlistError) === 'Unauthorized'
+  ) {
+    console.log('error')
+    dispatch(openErrorModal())
+  }
 
   return (
     <>
       <CssBaseline />
+      <ErrorModal />
+
       <Router>
         <main className={classes.mainContainer}>
           <NavBar />

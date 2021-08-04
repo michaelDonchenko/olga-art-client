@@ -62,6 +62,9 @@ const orderSlice = createSlice({
       state.success = false
       state.order = undefined
     },
+    resetError: (state) => {
+      state.error = false
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -76,10 +79,15 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(create.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
       // get order
       .addCase(order.pending, (state, action) => {
@@ -91,10 +99,15 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(order.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
       // get orders
       .addCase(orders.pending, (state, action) => {
@@ -107,10 +120,15 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(orders.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
       // get user orders
       .addCase(userOrders.pending, (state, action) => {
@@ -123,10 +141,15 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(userOrders.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
       // update paypal payment
       .addCase(paypalPayment.pending, (state, action) => {
@@ -138,10 +161,15 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(paypalPayment.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
       // update order status
       .addCase(updateOrder.pending, (state, action) => {
@@ -154,14 +182,20 @@ const orderSlice = createSlice({
         state.error = false
       })
       .addCase(updateOrder.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.error = action.payload.errors[0].msg)
-          : (state.error = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.error = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.error = action.payload.errors[0].msg)
+            : (state.error = action.payload.message)
+        }
       })
   },
 })
 
-export const { clearState, setPage, clearOrder } = orderSlice.actions
+export const { clearState, setPage, clearOrder, resetError } =
+  orderSlice.actions
 
 export default orderSlice.reducer

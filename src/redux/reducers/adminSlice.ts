@@ -53,10 +53,15 @@ const adminSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(uploadBanner.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //upload profile image
       .addCase(uploadProfile.pending, (state, action) => {
@@ -68,10 +73,15 @@ const adminSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(uploadProfile.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get banner image
       .addCase(banner.pending, (state, action) => {
@@ -129,10 +139,15 @@ const adminSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(updateAbout.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get site rules
       .addCase(siteRules.pending, (state, action) => {
@@ -160,10 +175,15 @@ const adminSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(updateRules.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
   },
 })

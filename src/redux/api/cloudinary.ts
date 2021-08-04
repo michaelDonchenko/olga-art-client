@@ -4,7 +4,7 @@ const server_url = process.env.REACT_APP_SERVER_URL
 
 export type productImageObj = {
   id: string
-  array: string[]
+  image: string
 }
 
 export type deleteProductImageObject = {

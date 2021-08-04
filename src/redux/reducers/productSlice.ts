@@ -134,6 +134,10 @@ const productSlice = createSlice({
     resetAddToWishlistSuccess: (state) => {
       state.addToWishlistSuccess = false
     },
+    resetError: (state) => {
+      state.errorMessage = false
+      state.addToWishlistError = false
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -148,10 +152,15 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(create.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get products
       .addCase(products.pending, (state, action) => {
@@ -182,10 +191,15 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(adminProducts.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get product
       .addCase(product.pending, (state, action) => {
@@ -216,10 +230,15 @@ const productSlice = createSlice({
       .addCase(
         productImageUpload.rejected,
         (state, action: PayloadAction<any>) => {
-          state.loading = false
-          action.payload.errors
-            ? (state.errorMessage = action.payload.errors[0].msg)
-            : (state.errorMessage = action.payload.message)
+          if (action.payload === 'Unauthorized') {
+            state.loading = false
+            state.errorMessage = action.payload
+          } else {
+            state.loading = false
+            action.payload.errors
+              ? (state.errorMessage = action.payload.errors[0].msg)
+              : (state.errorMessage = action.payload.message)
+          }
         }
       )
       //delete product image
@@ -235,10 +254,15 @@ const productSlice = createSlice({
       .addCase(
         productImageDelete.rejected,
         (state, action: PayloadAction<any>) => {
-          state.loading = false
-          action.payload.errors
-            ? (state.errorMessage = action.payload.errors[0].msg)
-            : (state.errorMessage = action.payload.message)
+          if (action.payload === 'Unauthorized') {
+            state.loading = false
+            state.errorMessage = action.payload
+          } else {
+            state.loading = false
+            action.payload.errors
+              ? (state.errorMessage = action.payload.errors[0].msg)
+              : (state.errorMessage = action.payload.message)
+          }
         }
       )
       //update product details
@@ -251,10 +275,15 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(update.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //delete product
       .addCase(remove.pending, (state, action) => {
@@ -266,10 +295,15 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(remove.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       //get random products
       .addCase(randomProducts.pending, (state, action) => {
@@ -296,8 +330,15 @@ const productSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(addToWishlist.rejected, (state, action: PayloadAction<any>) => {
-        state.wishlistLoading = false
-        state.addToWishlistError = action.payload.message
+        if (action.payload === 'Unauthorized') {
+          state.wishlistLoading = false
+          state.addToWishlistError = action.payload
+        } else {
+          state.wishlistLoading = false
+          action.payload.errors
+            ? (state.addToWishlistError = action.payload.errors[0].msg)
+            : (state.addToWishlistError = action.payload.message)
+        }
       })
   },
 })
@@ -313,6 +354,7 @@ export const {
   setProductToDisplay,
   resetCreatedProductId,
   resetAddToWishlistSuccess,
+  resetError,
 } = productSlice.actions
 
 export default productSlice.reducer

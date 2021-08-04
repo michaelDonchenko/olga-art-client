@@ -88,6 +88,9 @@ const cartSlice = createSlice({
     clearSuccess: (state) => {
       state.successMessage = false
     },
+    clearError: (state) => {
+      state.errorMessage = false
+    },
     resetCart: (state) => {
       state.products = null
       state.cartFromDb = undefined
@@ -106,10 +109,15 @@ const cartSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(saveCart.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
       // get cart from backend
       .addCase(getCart.pending, (state, action) => {
@@ -122,10 +130,15 @@ const cartSlice = createSlice({
         state.errorMessage = false
       })
       .addCase(getCart.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        action.payload.errors
-          ? (state.errorMessage = action.payload.errors[0].msg)
-          : (state.errorMessage = action.payload.message)
+        if (action.payload === 'Unauthorized') {
+          state.loading = false
+          state.errorMessage = action.payload
+        } else {
+          state.loading = false
+          action.payload.errors
+            ? (state.errorMessage = action.payload.errors[0].msg)
+            : (state.errorMessage = action.payload.message)
+        }
       })
   },
 })
@@ -136,6 +149,7 @@ export const {
   setPaymentMethod,
   clearSuccess,
   resetCart,
+  clearError,
 } = cartSlice.actions
 
 export default cartSlice.reducer

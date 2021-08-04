@@ -4,12 +4,14 @@ interface initialStateI {
   siteRulesModal: boolean
   adminMenuModal: boolean
   navigationModal: boolean
+  errorModal: boolean
 }
 
 const initialState: initialStateI = {
   siteRulesModal: false,
   adminMenuModal: false,
   navigationModal: false,
+  errorModal: false,
 }
 
 const modalSlice = createSlice({
@@ -34,6 +36,12 @@ const modalSlice = createSlice({
     closeNavigationModal: (state) => {
       state.navigationModal = false
     },
+    openErrorModal: (state) => {
+      state.errorModal = true
+    },
+    closeErrorModal: (state) => {
+      state.errorModal = false
+    },
   },
 })
 
@@ -44,6 +52,8 @@ export const {
   closeAdminMenuModal,
   openNavigationModal,
   closeNavigationModal,
+  openErrorModal,
+  closeErrorModal,
 } = modalSlice.actions
 
 export default modalSlice.reducer

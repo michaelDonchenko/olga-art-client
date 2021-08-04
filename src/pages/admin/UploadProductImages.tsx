@@ -59,7 +59,9 @@ const UploadProductImages = () => {
           <>
             <UploadProductImagesForm />
 
-            {product?.images?.length ? <UploadedImagesPreview /> : null}
+            {!loading && product?.images?.length ? (
+              <UploadedImagesPreview />
+            ) : null}
           </>
         )}
 
