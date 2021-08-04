@@ -22,8 +22,8 @@ const UploadBanner = () => {
     if (image) {
       Resizer.imageFileResizer(
         image[0],
-        700,
-        700,
+        500,
+        500,
         'auto',
         100,
         0,

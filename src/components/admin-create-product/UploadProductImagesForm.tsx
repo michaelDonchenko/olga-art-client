@@ -55,8 +55,8 @@ const UploadProductImagesForm = () => {
       for (let i = 0; i < files.length; i++) {
         Resizer.imageFileResizer(
           files[i],
-          700,
-          700,
+          500,
+          500,
           'auto',
           100,
           0,
