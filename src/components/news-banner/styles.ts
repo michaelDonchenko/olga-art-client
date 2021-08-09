@@ -8,7 +8,11 @@ const styles = makeStyles({
     justifyContent: 'center',
   },
 
-  img: {
+  smallImg: {
+    width: '80%',
+  },
+
+  largeImage: {
     width: '100%',
   },
 })
