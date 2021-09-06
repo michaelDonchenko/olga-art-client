@@ -12,7 +12,7 @@ const WelcomeMessage: React.FC = () => {
 
   return (
     <div>
-      <div className={classes.flexCenterDiv}>
+      <div className={classes.flexStartDiv}>
         <img src={logo} alt='logo' className={classes.image} />
       </div>
 

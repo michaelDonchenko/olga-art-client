@@ -17,6 +17,16 @@ const styles = makeStyles({
       backgroundColor: '#b71c1c',
     },
   },
+
+  inStockSpan: {
+    color: 'green',
+    fontWeight: 'bold',
+  },
+
+  outStockSpan: {
+    color: 'red',
+    fontWeight: 'bold',
+  },
 })
 
 export default styles

@@ -66,6 +66,7 @@ const ProductsTable = () => {
               <TableCell align='right'>Name</TableCell>
               <TableCell align='right'>Category</TableCell>
               <TableCell align='right'>Main Image</TableCell>
+              <TableCell align='right'>In Stock</TableCell>
               <TableCell align='right'>Update Details</TableCell>
               <TableCell align='right'>Update Images</TableCell>
               <TableCell align='right'>Delete</TableCell>
@@ -94,6 +95,17 @@ const ProductsTable = () => {
                     ) : (
                       'No images yet'
                     )}
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      className={
+                        p.quantity > 0
+                          ? classes.inStockSpan
+                          : classes.outStockSpan
+                      }
+                    >
+                      {p.quantity}
+                    </span>
                   </TableCell>
                   <TableCell align='right'>
                     <Button

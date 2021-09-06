@@ -20,10 +20,14 @@ const styles = makeStyles({
     justifyContent: 'center',
   },
 
+  flexStartDiv: {
+    display: 'flex',
+  },
+
   image: {
-    width: '300px',
-    margin: '10px auto',
-    maxWidth: '90%',
+    width: '150px',
+    margin: '15px 10px',
+    maxWidth: '40%',
   },
 })
 

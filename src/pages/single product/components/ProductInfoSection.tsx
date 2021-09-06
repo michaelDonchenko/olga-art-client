@@ -57,7 +57,7 @@ const ProductInfoSection = ({ product }: Props) => {
       </Typography>
       <hr></hr>
       <div className={classes.infoDiv}>
-        <p className={classes.text}>
+        <p className={classes.text} style={{ whiteSpace: 'pre-line' }}>
           <span className={classes.spanTag}>Details:</span>
           {product?.description}
         </p>
